@@ -40,6 +40,7 @@
 </template>
 <script>
   export default {
+    name: "ButtonNav",
     data () {
       return {
         bottomNav: 'recent'

@@ -1,19 +1,26 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-    <button v-on:click="test">test</button>
-  </div>
+    <v-app>
+        <v-content>
+            <div class="scroll-container">
+                <v-container fluid grid-list-xl>
+                    <router-view></router-view>
+                </v-container>
+            </div>
+        </v-content>
+        <ButtonNav/>
+    </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import AppBar from './components/AppBar.vue';
+import ButtonNav from './components/ButtonNav.vue';
+import HelloWorld from './components/HelloWorld.vue';
 
 export default {
   name: 'app',
    // dependencies : ['ahoiService'],
   components: {
-    HelloWorld
+    ButtonNav
   },
     methods: {
         test: function(){
@@ -22,14 +29,3 @@ export default {
     }
 }
 </script>
-
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
