@@ -3,7 +3,7 @@ pipeline{
   stages{
     stage ('checkout'){
       steps{
-        cleanWs()
+        deleteDir()
         checkout scm
       }
     }
