@@ -72,7 +72,7 @@ export default {
   },
   subscriptions () {
     return {
-      accountAmount: window.ahoi.saldo(USERS[0].bankAccount.iban)
+      accountAmount: window.ahoi.saldo('DE00999940000000001128')
     }
   },
   dependencies : ['ahoiService'],
