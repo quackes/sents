@@ -27,7 +27,6 @@ Vue.use(require('vue-currency-filter'));
 Vue.use(require('vue-moment'));
 
 const router = new VueRouter({
-  // mode: 'history',
   base: __dirname,
   routes: [
     { path: "/", component: Welcome },
