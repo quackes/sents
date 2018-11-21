@@ -8,6 +8,7 @@ import VueRouter from 'vue-router';
 import App from './App.vue'
 import './pipes/currency';
 import Dashboard from './components/pages/Dashboard.vue';
+import { DATA } from './models';
 
 Vue.config.productionTip = false;
 
@@ -22,7 +23,9 @@ const router = new VueRouter({
   routes: [
     { path: '/', component: Dashboard }
   ]
-})
+});
+
+console.log(DATA);
 
 new Vue({
   router,

@@ -2,12 +2,10 @@ export class BankAccount {
 
   iban = '';
   bic = '';
-  bank = '';
 
-  constructor(iban, bic, bank) {
+  constructor(iban, bic) {
     this.iban = iban;
     this.bic = bic;
-    this.bank = bank;
   }
 
   set iban(iban) {
@@ -21,14 +19,6 @@ export class BankAccount {
   set bic(bic) {
     if (typeof bic === 'string') {
       this._bic= bic;
-    } else {
-      throw 'Type error!';
-    }
-  }
-
-  set bank(bank) {
-    if (typeof bank === 'string') {
-      this._bank = bank;
     } else {
       throw 'Type error!';
     }

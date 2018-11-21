@@ -1,4 +1,5 @@
 import { BankAccount } from './bank-account';
+import { Wish } from './wish';
 
 class Role {
   _gender = 'male';
@@ -6,10 +7,10 @@ class Role {
   _lastname = '';
   _bankAccount = null;
 
-  constructor(gender, firstname, lastname, bankAccount) {
+  constructor(gender, firstname, bankAccount) {
     this.gender = gender;
     this.firstname = firstname;
-    this.lastname = lastname;
+    this.lastname = '';
     this.bankAccount = bankAccount;
   }
 
@@ -49,6 +50,12 @@ class Role {
 }
 export class Child extends Role {
   _ratio = 0.5;
+  _wishes = [];
+
+  constructor(gender, firstname, bankAccount, wishes = []) {
+    super(gender, firstname, bankAccount);
+    this.wishes = wishes;
+  }
 
   set ratio(ratio) {
     if (typeof ratio === 'number') {
@@ -59,6 +66,17 @@ export class Child extends Role {
   }
   get ratio() {
     return this._ratio;
+  }
+
+  set wishes(wishes) {
+    if (Array.isArray(wishes)) {
+      this._wishes = wishes;
+    } else {
+      throw 'Type error!';
+    }
+  }
+  get wishes() {
+    return this._wishes;
   }
 }
 export class Parent extends Role {}
