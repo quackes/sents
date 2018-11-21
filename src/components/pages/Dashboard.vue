@@ -36,7 +36,7 @@
       </v-flex>
       <v-flex xs5>
         <b>Freizeit</b><br>
-        {{freeAmount|currency}}
+        <!-- {{freeAmount|currency}} -->
         {{accountAmount|currency}}
       </v-flex>
       <v-flex xs2>
@@ -72,7 +72,7 @@ export default {
   },
   subscriptions () {
     return {
-      accountAmount: window.ahoi.saldo('DE00999940000000001128')
+      accountAmount: window.ahoi.saldo('DE00999940000000001135')
     }
   },
   dependencies : ['ahoiService'],
