@@ -15,6 +15,7 @@ import Welcome from "./components/pages/Welcome.vue";
 import Dashboard from "./components/pages/Dashboard.vue";
 import Wish from "./components/pages/Wish.vue";
 import Earn from "./components/pages/Earn.vue";
+import CashUp from "./components/pages/CashUp.vue";
 import Settings from "./components/pages/Settings.vue";
 
 Vue.config.productionTip = false;
@@ -32,6 +33,7 @@ const router = new VueRouter({
     { path: "/dashboard", component: Dashboard },
     { path: "/wish", component: Wish },
     { path: "/earn", component: Earn },
+    { path: "/cash-up", component: CashUp },
     { path: "/settings", component: Settings }
   ]
 });
