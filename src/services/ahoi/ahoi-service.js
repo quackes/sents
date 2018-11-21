@@ -1,7 +1,7 @@
 import injector from 'vue-inject';
 
-import axios from 'axios'
-
+//import axios from 'axios'
+/*
 import {config} from './ahoi-config'
 
 let httpClient =  axios.create({
@@ -27,3 +27,4 @@ class AhoiService{
     }
 }
 injector.service('ahoiService', AhoiService);
+*/

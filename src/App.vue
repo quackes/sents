@@ -13,7 +13,7 @@ var a = '';
 
 export default {
   name: 'app',
-    dependencies : ['ahoiService'],
+   // dependencies : ['ahoiService'],
   components: {
     HelloWorld
   },
