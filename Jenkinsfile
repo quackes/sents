@@ -3,13 +3,14 @@ pipeline{
   stages{
     stage ('checkout'){
       steps{
+        deleteDir()
         checkout scm
       }
     }
     stage ('install modules'){
       steps{
         sh '''
-          npm install
+          npm run update
         '''
       }
     }
