@@ -6,13 +6,13 @@
   <v-container grid-list-md text-xs-center>
     <v-layout row wrap>
       <v-flex xs5>
-        {{tasks.length}}
+        {{numberOfOpenTasks}}
       </v-flex>
       <v-flex xs2>
         ≙
       </v-flex>
       <v-flex xs5>
-        {{amount|currency}}
+        {{openAmount|currency}}
       </v-flex>
       <v-flex xs12>
         <b>Freizeit vs. Sparen</b>
@@ -36,18 +36,18 @@
       </v-flex>
       <v-flex xs5>
         <b>Freizeit</b><br>
-        {{user.bankAccount.amount|currency}}
+        {{freeAmount|currency}}
       </v-flex>
       <v-flex xs2>
         <small><i>...</i></small>
       </v-flex>
       <v-flex xs5>
         <b>Gespart</b><br>
-        {{user.bankAccount.amount|currency}}
+        {{wishAmount|currency}}
       </v-flex>
       <v-flex xs12>
         <b>Verdient gesamt</b><br>
-        {{freeAmount|currency}}
+        {{fullAmount|currency}}
       </v-flex>
     </v-layout>
   </v-container>
@@ -56,7 +56,7 @@
 <script>
 import { TASKS, USERS, COMPLETIONS }from '../../models/';
 import { Task } from '../../models/'
-import { getFreeAmount } from '../../services/helper.service';
+import { getFreeAmount, getWishAmount, getOpenAmount, getFullAmount, numberOfOpenTasks } from '../../services/helper.service';
 
 console.log(USERS);
 
@@ -69,18 +69,20 @@ export default {
     }
   },
   computed: {
-    amount: function() {
-      let amount = 0;
-      console.log(this.tasks);
-      this.tasks.forEach((task) => {
-        if (task instanceof Task) {
-          amount += task.amount;
-        }
-      });
-      return amount;
+    numberOfOpenTasks: function() {
+      return numberOfOpenTasks();
+    },
+    openAmount: function() {
+      return getOpenAmount(COMPLETIONS, this.user);
+    },
+    fullAmount: function() {
+      return getFullAmount(COMPLETIONS, this.user);
     },
     freeAmount: function() {
       return getFreeAmount(COMPLETIONS, this.user);
+    },
+    wishAmount: function() {
+      return getWishAmount(COMPLETIONS, this.user);
     }
   }
 };

@@ -38,7 +38,7 @@ export class ParentTaskList {
     }
   }
   addTask(task) {
-    if (task instanceof Task && task.parent === this.parent) {
+    if (task instanceof Task && task.parent === this.parent && task.isDone()) {
       this._tasks.push(task);
     }
   }

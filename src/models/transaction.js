@@ -4,11 +4,12 @@ import { ParentTaskList } from './task-list';
 export class Transaction extends ParentTaskList {
   _tan = true;
   _child = null;
+  _ratio = 100;
+  _paid = false;
 
   constructor(parent, child, tasks = []) {
     super(parent, tasks);
     this.child = child;
-    this.ratio = child.ratio;
   }
 
   get sender() {
@@ -16,6 +17,17 @@ export class Transaction extends ParentTaskList {
       name: `${this._parent.firstname} ${this._parent.lastname}`,
       bankAccount: `${this._parent.bankAccount}`
     };
+  }
+
+  get ratio() {
+    return this._ratio;
+  }
+
+  paid() {
+    this._paid = true;
+  }
+  isPaid() {
+    return this._paid === true;
   }
 
   get receiver() {
@@ -51,6 +63,7 @@ export class Transaction extends ParentTaskList {
   set child(child) {
     if (child instanceof Child) {
       this._child = child;
+      this._ratio = JSON.parse(JSON.stringify(child.ratio));
     } else {
       throw 'Type error!';
     }
