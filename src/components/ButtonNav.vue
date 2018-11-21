@@ -1,5 +1,5 @@
 <template>
-  <v-card height="200px" flat>
+  <v-card flat>
     <v-bottom-nav
       :active.sync="bottomNav"
       :value="true"
