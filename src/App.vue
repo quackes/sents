@@ -43,4 +43,8 @@ export default {
   overflow-y: scroll;
   backface-visibility: hidden;
 }
+.container {
+  padding-left: 8px;
+  padding-right: 8px;
+}
 </style>

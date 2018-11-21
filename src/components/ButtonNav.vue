@@ -54,12 +54,12 @@ export default {
   data() {
     return {
       bottomNav: "recent",
-      hide: false
+      hide: true
     };
   },
-  mounted: function () {
+  mounted: function() {
     window.router.afterEach((to, from) => {
-      if (to.path === '/') {
+      if (to.path === "/") {
         this.hide = true;
       } else {
         this.hide = false;
