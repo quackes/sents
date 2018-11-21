@@ -50,9 +50,9 @@
       </v-flex>
     </v-layout>
     <v-layout row justify-center>
-      <flex xs12>
+      <v-flex xs12 text-xs-center>
         <v-btn flat small color="primary">Hinzufügen</v-btn>
-      </flex>
+      </v-flex>
     </v-layout>
   </v-container>
   </div>

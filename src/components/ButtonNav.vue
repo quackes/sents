@@ -4,7 +4,7 @@
       :active.sync="bottomNav"
       :value="true"
       absolute
-      color="transparent"
+      color="white"
     >
       <v-btn
         color="teal"
@@ -20,6 +20,7 @@
         color="teal"
         flat
         value="earn"
+        to="/earn"
       >
         <span>Verdienen</span>
         <v-icon>favorite</v-icon>
