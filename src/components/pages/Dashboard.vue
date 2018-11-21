@@ -62,27 +62,24 @@
                 <h2>Statistik</h2>
               </v-flex>
             </v-layout>
+            <v-layout row>
+              <v-flex xs4>
+                <h5>Freizeit</h5>
+                <h3>{{accountAmount|currency}}</h3>
+              </v-flex>
+              <v-flex xs4>
+                  <h5>Gespart</h5>
+                  <h3>{{wishAmount|currency}}</h3>
+              </v-flex>
+              <v-flex xs4>
+                  <h5>Verdient gesamt</h5>
+                  <h3>{{fullAmount|currency}}</h3>
+              </v-flex>
+            </v-layout>
           </v-card-text>
         </v-card>
       </v-flex>
     </v-layout>
-      
-      <v-flex xs5>
-        <b>Freizeit</b><br>
-        <!-- {{freeAmount|currency}} -->
-        {{accountAmount|currency}}
-      </v-flex>
-      <v-flex xs2>
-        <small><i>...</i></small>
-      </v-flex>
-      <v-flex xs5>
-        <b>Gespart</b><br>
-        {{wishAmount|currency}}
-      </v-flex>
-      <v-flex xs12>
-        <b>Verdient gesamt</b><br>
-        {{fullAmount|currency}}
-      </v-flex>
   </v-container>
   </div>
 </template>
@@ -110,8 +107,8 @@ export default {
   },
   subscriptions() {
     return {
-      accountAmount: window.ahoi.saldo('DE00999940000000001135')
-    }
+      accountAmount: window.ahoi.saldo("DE00999940000000001135")
+    };
   },
   dependencies: ["ahoiService"],
   computed: {
