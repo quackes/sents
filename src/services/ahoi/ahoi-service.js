@@ -24,27 +24,27 @@ class AhoiService {
     childAccount = null;
 
 
-    constructor(){
+    constructor() {
         this.storageService = new StorageService()
-        this.ahoiClient =  AhoiClient.ApiClient.instance
+        this.ahoiClient = AhoiClient.ApiClient.instance
         this.ahoiClient.basePath = this.baseUrl + '/ahoi/api/v2'
         this.ahoiClient.setOAuthCredentials(this.baseUrl + '/auth/v1/oauth/token?grant_type=client_credentials',
             config.clientId, config.clientSecret, config.appSecretKey, config.appSecretIV)
 
         this.installationId = window.localStorage.getItem(this.installationStorageKey);
-        if(this.installationId){
+        if (this.installationId) {
             this.ahoiClient.oAuthClient.setInstallationId(this.installationId);
         }
 
     }
 
-    getInstallationId(){
-        if(this.installationId){
+    getInstallationId() {
+        if (this.installationId) {
             return Promise.resolve(this.installationId);
         }
         return new Promise((resolve, reject) => {
-            new AhoiClient.RegistrationApi().register((error, data)=>{
-                if(error){
+            new AhoiClient.RegistrationApi().register((error, data) => {
+                if (error) {
                     reject(error)
                     return;
                 }
@@ -52,7 +52,7 @@ class AhoiService {
                 this.ahoiClient.oAuthClient.setInstallationId(this.installationId)
                 resolve(data.installation);
             })
-        }).then((installation) =>{
+        }).then((installation) => {
             this.installationId = installation;
             window.localStorage.setItem(this.installationStorageKey, this.installationId);
             this.ahoiClient.oAuthClient.setInstallationId(installation);
@@ -60,11 +60,11 @@ class AhoiService {
         })
     }
 
-    init(){
+    init() {
         return this.getInstallationId()
-            .then(()=>{
+            .then(() => {
                 return new Promise((resolve, reject) => {
-                    new AhoiClient.ProviderApi().getProviders(null, (error, data)=>{
+                    new AhoiClient.ProviderApi().getProviders(null, (error, data) => {
                         let providerId = data[0].id;
                         new AhoiClient.AccessApi().postAccess({
                             "providerId": providerId,
@@ -74,9 +74,9 @@ class AhoiService {
                                 "USERNAME": config.ahoiAccessFields.USERNAME,
                                 "PIN": config.ahoiAccessFields.PIN
                             }
-                        }, (error, data)=>{
+                        }, (error, data) => {
 
-                            if(error){
+                            if (error) {
                                 reject(error)
                                 return;
                             }
@@ -90,16 +90,16 @@ class AhoiService {
 
                     new AhoiClient.AccountApi()
                         .getAccounts(access.id, (error, data) => {
-                            if(error){
+                            if (error) {
                                 reject(error)
                                 return;
                             }
                             this.parentAccount =
-                                data.filter((account)=>{
+                                data.filter((account) => {
                                     return account.iban === config.parentAccountIban
                                 })[0]
                             this.childAccount =
-                                data.filter((account)=>{
+                                data.filter((account) => {
                                     return account.iban === config.childAccountIban
                                 })[0]
 
@@ -111,7 +111,7 @@ class AhoiService {
     }
 
     saldo(iban) {
-        if(this.bankingAccess){
+        if (this.bankingAccess) {
             return Promise.reject("no banking access present. please log in")
         }
 
@@ -119,29 +119,29 @@ class AhoiService {
 
             new AhoiClient.AccountApi()
                 .getAccounts(access.id, (error, data) => {
-                    if(error){
+                    if (error) {
                         reject(error)
                         return;
                     }
 
                     let account =
-                        data.filter((account)=>{
+                        data.filter((account) => {
                             return account.iban === iban
                         })
-                    if(account && account.length > 0){
+                    if (account && account.length > 0) {
                         resolve(account[0])
-                    }else{
+                    } else {
                         reject('No bank account found for iban ' + iban)
                     }
                 })
         })
-        .then(account => {
-            return account.balance.amount
-        })
+            .then(account => {
+                return account.balance.amount
+            })
     }
 
     transfer(transaction) {
-        if(!this.parentAccount || !this.childAccount){
+        if (!this.parentAccount || !this.childAccount) {
             return Promise.reject('No parent or child account set')
         }
 
@@ -149,66 +149,93 @@ class AhoiService {
         let purpose = transaction.purpose();
 
         let transfer = {
-            "iban" : this.transaction.child.bankAccount.iban,
-            "bic" : this.transaction.child.bankAccount.bic,
-            "name" : this.childAccount.owner,
-            "amount" : {
-                "value" : amount,
-                "currency" : "EUR"
+                "iban": transaction.child.bankAccount.iban,
+            "bic": transaction.child.bankAccount.bic,
+            "name": this.childAccount.owner,
+            "amount": {
+                "value": amount,
+                "currency": "EUR"
             },
-            "purpose" : purpose
+            "purpose": purpose
         }
 
         return new Promise((resolve, reject) => {
             new AhoiClient.TransferApi()
-                .postTransfer(this.bankingAccess.id, this.parentAccount.id, transfer, (error, data) =>{
-                    if(error){
+                .postTransfer(this.bankingAccess.id, this.parentAccount.id, transfer, (error, data) => {
+                    if (error) {
                         reject(error);
                         return;
                     }
 
                     this.pollState(data.id, 'AUTHORIZATION_PENDING')
-                        .then(()=>{
-                            return new AhoiClient.TaskApi()
-                                .getChallenge(data.id, (error, data)=>{
-                                    if(error){
-                                        reject(error)
-                                    }
-                                    resolve(data);
-                                })
+                        .then(() => {
+                            return new Promise((resolve1, reject1) => {
+                                return new AhoiClient.TaskApi()
+                                    .getChallenge(data.id, (error, data) => {
+                                        if (error) {
+                                            reject1(error)
+                                        }
+                                        resolve1(data);
+                                    })
+                            })
                         })
+                        .then((challenge)=>{
+                            const regex = /\*\*\*([0-9]*)\*\*\*/g;
+                            const str = challenge.challenge;
 
+                            let tanMatch = regex.exec(str)
+
+                            let req = {
+                                "type": "TanChallengeResponse",
+                                "response": tanMatch[1]
+                            }
+
+                            return new Promise((resolve1, reject1) => {
+                                new AhoiClient.TaskApi()
+                                    .postChallengeResponse(data.id, req, (error, data) => {
+                                        if(error){
+                                            reject1(error)
+                                        }
+                                        resolve(data);
+                                    })
+                            })
+                        }).then((authorizeAnswer)=>{
+                          if(authorizeAnswer.state === 'DONE'){
+                              return {success: true}
+                          }
+                          return this.pollState(data.id, 'DONE')
+                    }).then(resolve, reject)
                 })
         });
     }
 
-    pollState(taskId, successState){
+    pollState(taskId, successState) {
 
         return new Promise((resolve, reject) => {
             pollFn(resolve, reject)
         });
 
-        function pollFn(resolve, reject){
+        function pollFn(resolve, reject) {
             getTaskStatus()
-                .then((taskStatus)=>{
-                    if(taskStatus.state === successState){
+                .then((taskStatus) => {
+                    if (taskStatus.state === successState) {
                         resolve()
-                    }else if(taskStatus.state === 'FAILED', taskStatus.state === 'AUTHORIZATION_WRONG'){
+                    } else if (taskStatus.state === 'FAILED', taskStatus.state === 'AUTHORIZATION_WRONG') {
                         reject(taskStatus)
                     }
                     else {
-                        setTimeout(()=> pollFn(resolve, reject) , 500)
+                        setTimeout(() => pollFn(resolve, reject), 500)
                     }
 
                 })
                 .catch(reject)
         }
 
-        function getTaskStatus(){
+        function getTaskStatus() {
             return new Promise((resolve, reject) => {
                 new AhoiClient.TaskApi()
-                    .getTask(taskId, (error, data) =>{
-                        if(error){
+                    .getTask(taskId, (error, data) => {
+                        if (error) {
                             reject(error);
                             return;
                         }
