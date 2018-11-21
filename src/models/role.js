@@ -23,6 +23,9 @@ class Role {
         this._gender = 'female';
     }
   }
+  get gender() {
+    return this._gender;
+  }
 
   set firstname(firstname) {
     if (typeof firstname === 'string') {
@@ -30,6 +33,9 @@ class Role {
     } else {
       throw 'Type error!';
     }
+  }
+  get firstname() {
+    return this._firstname;
   }
 
   set lastname(lastname) {
@@ -39,6 +45,9 @@ class Role {
       throw 'Type error!';
     }
   }
+  get lastname() {
+    return this._lastname;
+  }
 
   set bankAccount(bankAccount) {
     if (bankAccount instanceof BankAccount) {
@@ -47,9 +56,12 @@ class Role {
       throw 'Type error!';
     }
   }
+  get bankAccount() {
+    return this._bankAccount;
+  }
 }
 export class Child extends Role {
-  _ratio = 0.5;
+  _ratio = 50;
   _wishes = [];
 
   constructor(gender, firstname, bankAccount, wishes = []) {
@@ -66,6 +78,9 @@ export class Child extends Role {
   }
   get ratio() {
     return this._ratio;
+  }
+  get invRatio() {
+    return 100 - this._ratio;
   }
 
   set wishes(wishes) {

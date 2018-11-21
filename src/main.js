@@ -7,6 +7,7 @@ import injector from 'vue-inject';
 import VueRouter from 'vue-router';
 import App from './App.vue'
 import './pipes/currency';
+import './pipes/percent';
 import Dashboard from './components/pages/Dashboard.vue';
 import { DATA } from './models';
 
