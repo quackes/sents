@@ -4,10 +4,8 @@ export class Wish {
   _open = true;
   _title = 'Wunsch';
   _amount = 0;
-  _child = null;
 
-  constructor(child, title, amount) {
-    this.child = child;
+  constructor( title, amount) {
     this.title = title;
     this.amount = amount;
   }
@@ -42,14 +40,4 @@ export class Wish {
     return this._amount;
   }
 
-  set child(child) {
-    if (child instanceof Child) {
-      this._child = child;
-    } else {
-      throw 'Type error!';
-    }
-  }
-  get child() {
-    return this._child;
-  }
 }
