@@ -92,7 +92,6 @@ class AhoiService {
                                 reject(error)
                                 return;
                             }
-                            console.log(data)
                             this.parentAccount =
                                 data.filter((account)=>{
                                     return account.iban === config.parentAccountIban
@@ -109,17 +108,47 @@ class AhoiService {
 
     }
 
-    transfer(transactionDef) {
+    saldo(iban) {
+        if(this.bankingAccess){
+            return Promise.reject("no banking access present. please log in")
+        }
+
+        return new Promise((resolve, reject) => {
+
+            new AhoiClient.AccountApi()
+                .getAccounts(access.id, (error, data) => {
+                    if(error){
+                        reject(error)
+                        return;
+                    }
+
+                    let account =
+                        data.filter((account)=>{
+                            return account.iban === iban
+                        })
+                    if(account && account.length > 0){
+                        resolve(account[0])
+                    }else{
+                        reject('No bank account found for iban ' + iban)
+                    }
+                })
+        })
+        .then(account => {
+            return account.balance.amount
+        })
+    }
+
+    transfer(transaction) {
         if(!this.parentAccount || !this.childAccount){
             return Promise.reject('No parent or child account set')
         }
 
-        let amount = 100
-        let purpose = "TEst"
+        let amount = transaction.freeAmount();
+        let purpose = transaction.purpose();
 
         let transfer = {
-            "iban" : this.childAccount.iban,
-            "bic" : this.childAccount.bic,
+            "iban" : this.transaction.child.bankAccount.iban,
+            "bic" : this.transaction.child.bankAccount.bic,
             "name" : this.childAccount.owner,
             "amount" : {
                 "value" : amount,
@@ -136,55 +165,58 @@ class AhoiService {
                         return;
                     }
 
-                    pollState(data.id)
+                    this.pollState(data.id, 'AUTHORIZATION_PENDING')
                         .then(()=>{
                             return new AhoiClient.TaskApi()
                                 .getChallenge(data.id, (error, data)=>{
-                                    console.log(data);
+                                    if(error){
+                                        reject(error)
+                                    }
+                                    resolve(data);
                                 })
                         })
 
                 })
         });
+    }
 
-        function pollState(taskId){
+    pollState(taskId, successState){
 
-            return new Promise((resolve, reject) => {
-                pollFn(resolve, reject)
-            });
+        return new Promise((resolve, reject) => {
+            pollFn(resolve, reject)
+        });
 
-            function pollFn(resolve, reject){
-                getTaskStatus()
-                    .then((taskStatus)=>{
-                        if(taskStatus.state === 'AUTHORIZATION_PENDING'){
-                            resolve()
-                        }else if(taskStatus.state === 'FAILED'){
-                            reject(taskStatus)
-                        }
-                        else {
-                            setTimeout(()=> pollFn(resolve, reject) , 500)
-                        }
+        function pollFn(resolve, reject){
+            getTaskStatus()
+                .then((taskStatus)=>{
+                    if(taskStatus.state === successState){
+                        resolve()
+                    }else if(taskStatus.state === 'FAILED', taskStatus.state === 'AUTHORIZATION_WRONG'){
+                        reject(taskStatus)
+                    }
+                    else {
+                        setTimeout(()=> pollFn(resolve, reject) , 500)
+                    }
 
-                    })
-                    .catch(reject)
-            }
-
-            function getTaskStatus(){
-                return new Promise((resolve, reject) => {
-                    new AhoiClient.TaskApi()
-                        .getTask(taskId, (error, data) =>{
-                            if(error){
-                                reject(error);
-                                return;
-                            }
-
-                            resolve(data);
-                        })
                 })
-            }
+                .catch(reject)
         }
 
+        function getTaskStatus(){
+            return new Promise((resolve, reject) => {
+                new AhoiClient.TaskApi()
+                    .getTask(taskId, (error, data) =>{
+                        if(error){
+                            reject(error);
+                            return;
+                        }
+
+                        resolve(data);
+                    })
+            })
+        }
     }
 }
 
 injector.service('ahoiService', AhoiService);
+window.ahoi = new AhoiService()
