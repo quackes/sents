@@ -12,13 +12,17 @@
       </v-flex>
     </v-layout>
     <v-layout row text-xs-center>
-      <v-flex xs6>
+      <v-flex xs4>
         <h3>Gespart</h3>
         <h1>120 €</h1>
       </v-flex>
-      <v-flex xs6>
+      <v-flex xs4>
         <h3>Übrig</h3>
         <h1>380 €</h1>
+      </v-flex>
+      <v-flex xs4>
+        <h3>Wunsch erreicht in</h3>
+        <h1>61 Tagen</h1>
       </v-flex>
     </v-layout>
     <v-spacer></v-spacer>
@@ -30,26 +34,25 @@
     <v-layout row>
       <v-flex xs12>
         <v-list>
-          <v-list-tile
-            v-for="item in items"
-            :key="item.title"
-            info
-          >
+          <template v-for="(item, index) in items">
+            <v-list-tile :key="index" info>
 
-            <v-list-tile-content>
-              <v-list-tile-title v-text="item.title"></v-list-tile-title>
-            </v-list-tile-content>
-
-            <div>
-              <div v-text="item.info"></div>
-            </div>
-          </v-list-tile>
-          <v-divider
-              v-if="item + 1 < items.length"
-              :key="title"
-            ></v-divider>
+              <v-list-tile-content>
+                <v-list-tile-title v-text="item.title"></v-list-tile-title>
+              </v-list-tile-content>
+              <div>
+                <div v-text="item.info"></div>
+              </div>
+            </v-list-tile>
+            <v-divider v-if="index + 1 < items.length" :key="`divider-${index}`"></v-divider>
+          </template>
         </v-list>
       </v-flex>
+    </v-layout>
+    <v-layout row justify-center>
+      <flex xs12>
+        <v-btn flat small color="primary">Hinzufügen</v-btn>
+      </flex>
     </v-layout>
   </v-container>
   </div>
