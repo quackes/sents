@@ -46,7 +46,9 @@
             </v-layout>
             <v-layout row justify-center>
                 <v-flex xs12 text-xs-center>
-                    <v-btn flat small color="primary">Login</v-btn>
+                    <router-link to="/login">
+                        <v-btn flat small color="primary">Login</v-btn>
+                    </router-link>
                 </v-flex>
             </v-layout>
             <v-layout row justify-center>

@@ -59,7 +59,7 @@ export default {
   },
   mounted: function() {
     window.router.afterEach((to, from) => {
-      if (to.path === "/") {
+      if (to.path === "/" || to.path === "/login") {
         this.hide = true;
       } else {
         this.hide = false;
