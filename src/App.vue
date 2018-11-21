@@ -9,8 +9,6 @@
 <script>
 import HelloWorld from './components/HelloWorld.vue'
 
-var a = '';
-
 export default {
   name: 'app',
    // dependencies : ['ahoiService'],
