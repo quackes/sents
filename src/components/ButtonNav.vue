@@ -1,5 +1,5 @@
 <template>
-  <v-card flat>
+  <v-card flat v-if="hide==false">
     <v-bottom-nav
       :active.sync="bottomNav"
       :value="true"
@@ -53,8 +53,18 @@ export default {
   name: "ButtonNav",
   data() {
     return {
-      bottomNav: "recent"
+      bottomNav: "recent",
+      hide: false
     };
+  },
+  mounted: function () {
+    window.router.afterEach((to, from) => {
+      if (to.path === '/') {
+        this.hide = true;
+      } else {
+        this.hide = false;
+      }
+    });
   }
 };
 </script>

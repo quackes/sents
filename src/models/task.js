@@ -1,4 +1,4 @@
-import { Child, Parent } from "./role";
+import { Child, Parent } from './role';
 
 export class Task {
   _done = false;
@@ -7,11 +7,16 @@ export class Task {
   _amount = 0;
   _parent = null;
   _child = null;
+  _icon = require('../assets/icon-dog.png');
 
   constructor(title, amount, parent) {
     this.title = title;
     this.amount = amount;
     this.parent = parent;
+  }
+
+  get icon() {
+    return this._icon;
   }
 
   done() {
