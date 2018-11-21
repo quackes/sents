@@ -16,14 +16,17 @@ import AppBar from './components/AppBar.vue';
 import ButtonNav from './components/ButtonNav.vue';
 import HelloWorld from './components/HelloWorld.vue';
 
+import AhoiService from './services/ahoi/ahoi-service'
+
+
 export default {
   name: 'app',
-   // dependencies : ['ahoiService'],
+  dependencies : ['ahoiService'],
   components: {
     ButtonNav
   },
     methods: {
-        test: function(){
+        loginAhoi: function(){
             this.ahoiService.init()
         }
     }

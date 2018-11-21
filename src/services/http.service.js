@@ -1,18 +1,16 @@
-// @flow
-
 import injector from 'vue-inject';
 import Rx from 'rx-dom-ajax';
 
 export class HttpService {
-  apiRestPath = '/api/rest/1.0/';
 
-  request(method, resource, payload = {}) {
+  request( method, url, payload, headers): Promise {
     return new Promise((resolve, reject) => {
       Rx.DOM.ajax({
         body: payload,
         method: method,
         responseType: 'json',
-        url: `${this.apiRestPath}${resource}`
+        url: `${url}`,
+        headers: headers
       }).subscribe(
         (response) => {
           resolve(response.response);
@@ -24,16 +22,16 @@ export class HttpService {
     });
   }
 
-  get(resource) {
-    return this.request('GET', resource);
+  get(url, headers){
+    return this.request('GET', url, headers);
   }
 
-  post(resource, payload) {
-    return this.request('POST', resource, payload);
+  post(url, payload, headers) {
+    return this.request('POST', url, payload, headers);
   }
 
-  put(resource, payload) {
-    return this.request('put', resource, payload);
+  put(url, payload, headers) {
+    return this.request('put', url, payload, headers);
   }
 }
 injector.service('HttpService', HttpService);

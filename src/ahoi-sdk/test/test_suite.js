@@ -1,0 +1,15 @@
+import './encryption/OAuthClient.spec.js';
+import './encryption/SessionSecurityHelper.spec.js';
+import './api/RegistrationApi.spec.js';
+import './api/ProviderApi.spec';
+import './api/AccessApi.spec';
+import './api/AccountApi.spec';
+import './api/ForecastApi.spec';
+import './api/TANSchemesApi.spec';
+import './api/TransactionApi.spec';
+import './api/TransactionPatternApi.spec';
+import './api/TransactionSummaryApi.spec';
+import './api/CategoryApi.spec';
+import './api/ContractApi.spec';
+import './api/SecurityApi.spec';
+import './api/TransferWalkthrough.spec';
