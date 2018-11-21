@@ -7,6 +7,7 @@ import * as AhoiClient from '../../ahoi-sdk/src/index'
 
 import {HttpService} from "../http.service";
 import {StorageService} from "../storage-service";
+import {ReplaySubject, throwError} from "rxjs";
 
 class AhoiService {
 
@@ -24,6 +25,9 @@ class AhoiService {
     childAccount = null;
 
 
+    saldoSubjects = {}
+
+
     constructor() {
         this.storageService = new StorageService()
         this.ahoiClient = AhoiClient.ApiClient.instance
@@ -35,6 +39,15 @@ class AhoiService {
         if (this.installationId) {
             this.ahoiClient.oAuthClient.setInstallationId(this.installationId);
         }
+        this.dataObs = this.storageService.watch();
+
+        this.dataObs.subscribe((data) =>{
+            Object.keys(this.saldoSubjects).forEach((key) =>{
+                let subj = this.saldoSubjects[key]
+                this.loadSaldo(key)
+                    .then(saldo => subj.next(saldo))
+            });
+        })
 
     }
 
@@ -110,15 +123,11 @@ class AhoiService {
 
     }
 
-    saldo(iban) {
-        if (this.bankingAccess) {
-            return Promise.reject("no banking access present. please log in")
-        }
-
+    loadSaldo(iban){
         return new Promise((resolve, reject) => {
 
             new AhoiClient.AccountApi()
-                .getAccounts(access.id, (error, data) => {
+                .getAccounts(this.bankingAccess.id, (error, data) => {
                     if (error) {
                         reject(error)
                         return;
@@ -134,10 +143,28 @@ class AhoiService {
                         reject('No bank account found for iban ' + iban)
                     }
                 })
+        }).then(account => {
+            return account.balance.amount
         })
-            .then(account => {
-                return account.balance.amount
+    }
+
+    saldo(iban) {
+        if (!this.bankingAccess) {
+            return throwError("no banking access present. please log in")
+        }
+
+        if(this.saldoSubjects[iban]){
+            return this.saldoSubjects[iban]
+        }
+
+        let subj = new ReplaySubject(1)
+        this.saldoSubjects[iban] = subj
+        this.loadSaldo(iban)
+            .then((saldo)=>{
+                subj.next(saldo)
             })
+        return subj
+
     }
 
     transfer(transaction) {
