@@ -1,39 +1,72 @@
 <template>
 <div>
   <v-toolbar app>
-      <v-toolbar-title>Übersicht</v-toolbar-title>
+      <v-toolbar-title>Übersicht 🏦</v-toolbar-title>
   </v-toolbar>
   <v-container grid-list-md text-xs-center>
-    <v-layout row wrap>
-      <v-flex xs5>
-        {{numberOfOpenTasks}}
-      </v-flex>
-      <v-flex xs2>
-        ≙
-      </v-flex>
-      <v-flex xs5>
-        {{openAmount|currency}}
-      </v-flex>
+    <v-layout row>
       <v-flex xs12>
-        <b>Freizeit vs. Sparen</b>
+        <v-card color="yellow">
+          <v-card-text>
+            <v-layout row align-center>
+              <v-flex xs5>
+                <h5>Offene Aufgaben</h5>
+                <h1>{{numberOfOpenTasks}}</h1>
+              </v-flex>
+              <v-flex xs2>
+                <v-icon>arrow_right_alt</v-icon>
+              </v-flex>
+              <v-flex xs5>
+                <h5> Zu verdienen</h5>
+                <h1>{{openAmount|currency}}</h1>
+              </v-flex>
+            </v-layout>
+          </v-card-text>
+        </v-card>
       </v-flex>
+    </v-layout>
+      
+     <v-layout row>
+        <v-flex xs12>
+          <v-card color="yellow">
+            <v-card-text>
+              <v-layout row justify-center>
+                <v-flex xs12>
+                  <h2>Freizeit vs. Sparen</h2>
+                </v-flex>
+              </v-layout>
+                <v-layout row>
+                  <v-flex xs12>
+                    <v-slider v-model="user.ratio"></v-slider>
+                  </v-flex>
+                </v-layout>
+                <v-layout row>
+                  <v-flex>
+                    <b>{{user.ratio|percent}}</b>
+                  </v-flex>
+                  <v-flex>
+                  {{user.invRatio|percent}}
+                </v-flex>
+                </v-layout>
+            </v-card-text>
+          </v-card>
+        </v-flex>
+     </v-layout>
 
-      <v-flex>
-        {{user.ratio|percent}}
-      </v-flex>
-
-      <v-flex>
-        <v-slider
-          v-model="user.ratio"
-        ></v-slider>
-      </v-flex>
-
-      <v-flex>
-        {{user.invRatio|percent}}
-      </v-flex>
+    <v-layout row>
       <v-flex xs12>
-        <b>Statistik</b>
+        <v-card color="yellow">
+          <v-card-text>
+            <v-layout row>
+              <v-flex xs12>
+                <h2>Statistik</h2>
+              </v-flex>
+            </v-layout>
+          </v-card-text>
+        </v-card>
       </v-flex>
+    </v-layout>
+      
       <v-flex xs5>
         <b>Freizeit</b><br>
         {{freeAmount|currency}}
@@ -50,32 +83,37 @@
         <b>Verdient gesamt</b><br>
         {{fullAmount|currency}}
       </v-flex>
-    </v-layout>
   </v-container>
   </div>
 </template>
 <script>
-import { TASKS, USERS, COMPLETIONS }from '../../models/';
-import { Task } from '../../models/'
-import { getFreeAmount, getWishAmount, getOpenAmount, getFullAmount, numberOfOpenTasks } from '../../services/helper.service';
-import '../../services/ahoi/ahoi-service';
+import { TASKS, USERS, COMPLETIONS } from "../../models/";
+import { Task } from "../../models/";
+import {
+  getFreeAmount,
+  getWishAmount,
+  getOpenAmount,
+  getFullAmount,
+  numberOfOpenTasks
+} from "../../services/helper.service";
+import "../../services/ahoi/ahoi-service";
 
 console.log(USERS);
 
 export default {
   name: "Dashboard",
-  data () {
+  data() {
     return {
       tasks: TASKS,
       user: USERS[0]
-    }
+    };
   },
-  subscriptions () {
+  subscriptions() {
     return {
-      accountAmount: window.ahoi.saldo('DE00999940000000001128')
-    }
+      accountAmount: window.ahoi.saldo("DE00999940000000001128")
+    };
   },
-  dependencies : ['ahoiService'],
+  dependencies: ["ahoiService"],
   computed: {
     numberOfOpenTasks: function() {
       return numberOfOpenTasks();
