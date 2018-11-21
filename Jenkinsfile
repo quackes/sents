@@ -15,9 +15,9 @@ pipeline{
     }
     stage ('build') {
       steps{
-        #   sh 'npm run build'
+        //   sh 'npm run build'
         sh 'mkdir dist && cp index.html dist/'
-          stash includes: 'dist/apps/web/**', name: 'webapp'
+          stash includes: 'dist/**', name: 'webapp'
       }
     }
     stage ('deploy') {
@@ -28,7 +28,7 @@ pipeline{
               openshift.withCluster() {
                 openshift.withProject() {
                     echo "Using project: ${openshift.project()}"
-                    openshift.selector("bc", "web").startBuild("--from-dir=./dist/apps/web", "--follow");
+                    openshift.selector("bc", "web").startBuild("--from-dir=./dist", "--follow");
               }
             }
           }
