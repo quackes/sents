@@ -10,6 +10,7 @@ import "./pipes/currency";
 import Dashboard from "./components/pages/Dashboard.vue";
 import Wish from "./components/pages/Wish.vue";
 import Earn from "./components/pages/Earn.vue";
+import Settings from "./components/pages/Settings.vue";
 import { DATA } from "./models";
 
 Vue.config.productionTip = false;
@@ -25,7 +26,8 @@ const router = new VueRouter({
   routes: [
     { path: "/", component: Dashboard },
     { path: "/wish", component: Wish },
-    { path: "/earn", component: Earn }
+    { path: "/earn", component: Earn },
+    { path: "/settings", component: Settings }
   ]
 });
 

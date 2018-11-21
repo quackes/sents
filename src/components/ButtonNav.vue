@@ -40,6 +40,7 @@
         color="teal"
         flat
         value="settings"
+        to="/settings"
       >
         <span>Einstellungen</span>
         <v-icon>place</v-icon>
