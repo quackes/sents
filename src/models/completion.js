@@ -2,18 +2,14 @@ import { Transaction } from './transaction';
 import { ParentTaskList } from './task-list';
 
 export class Completion extends ParentTaskList {
-  constructor(parent, tasks = []) {
-    super(parent, tasks);
-  }
-
   get transactions() {
     let transactions = {};
-    this.task.forEach(task => {
-      let transaction = transactions[task.child];
-      if (!(transaction instanceof Transaction)) {
-        transaction = new Transaction(parent, task.child);
+    this.tasks.forEach(task => {
+      if (!(transactions[task.child] instanceof Transaction)) {
+        transactions[task.child] = new Transaction(this.parent, task.child);
       }
-      transaction.addTask(task);
+      transactions[task.child].addTask(task);
+      transactions[task.child].paid();
     });
     return transactions;
   }

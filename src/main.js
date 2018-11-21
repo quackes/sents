@@ -1,18 +1,19 @@
 // @flow
-
-import "@babel/polyfill";
-import Vue from "vue";
-import "./plugins/vuetify";
-import injector from "vue-inject";
-import VueRouter from "vue-router";
-import App from "./App.vue";
-import "./pipes/currency";
+import '@babel/polyfill';
+import Vue from 'vue';
+import './plugins/vuetify';
+import injector from 'vue-inject';
+import VueRouter from 'vue-router';
+import App from './App.vue'
+import './pipes/currency';
+import './pipes/percent';
 import Welcome from "./components/pages/Welcome.vue";
 import Dashboard from "./components/pages/Dashboard.vue";
 import Wish from "./components/pages/Wish.vue";
 import Earn from "./components/pages/Earn.vue";
 import Settings from "./components/pages/Settings.vue";
-import { DATA } from "./models";
+import { DATA } from './models';
+
 
 Vue.config.productionTip = false;
 
