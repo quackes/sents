@@ -45,6 +45,15 @@
         <span>Einstellungen</span>
         <v-icon>place</v-icon>
       </v-btn>
+      <v-btn
+        color="teal"
+        flat
+        value="cash-up"
+        to="/cash-up"
+      >
+        <span>Abrechnen</span>
+        <v-icon>place</v-icon>
+      </v-btn>
     </v-bottom-nav>
   </v-card>
 </template>

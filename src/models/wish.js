@@ -1,11 +1,13 @@
 import { Child } from "./role";
+import { Uuid } from "./uuid";
 
-export class Wish {
+export class Wish extends Uuid {
   _open = true;
   _title = 'Wunsch';
   _amount = 0;
 
   constructor( title, amount) {
+    super();
     this.title = title;
     this.amount = amount;
   }

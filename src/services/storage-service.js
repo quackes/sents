@@ -28,4 +28,4 @@ export class StorageService {
 }
 
 injector.service('StorageService', StorageService);
-window.mystorage = new StorageService()
+window.StorageService = new StorageService()

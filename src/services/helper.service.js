@@ -1,6 +1,11 @@
 import { Child, Task, TASKS } from '../models';
 import { Completion } from '../models/completion';
 
+export function getClosedTasks() {
+  let tasks = [];
+  // TODO
+  return TASKS;
+}
 export function numberOfOpenTasks() {
   let counter = 0;
   TASKS.forEach((task) => {
