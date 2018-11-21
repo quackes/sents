@@ -10,7 +10,7 @@
         color="teal"
         flat
         value="overview"
-        to="/"
+        to="/dashboard"
       >
         <span>Übersicht</span>
         <v-icon>history</v-icon>
