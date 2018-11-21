@@ -3,7 +3,7 @@ import Rx from 'rx-dom-ajax';
 
 export class HttpService {
 
-  request( method, url, payload, headers): Promise {
+  request( method, url, payload, headers) {
     return new Promise((resolve, reject) => {
       Rx.DOM.ajax({
         body: payload,
@@ -15,7 +15,7 @@ export class HttpService {
         (response) => {
           resolve(response.response);
         },
-        (error: any) => {
+        (error) => {
           reject(error);
         }
       );

@@ -28,6 +28,9 @@ export default {
     methods: {
         loginAhoi: function(){
             this.ahoiService.init()
+                .then(()=>{
+                    this.ahoiService.transfer()
+                })
         }
     }
 }
