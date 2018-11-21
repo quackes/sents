@@ -6,6 +6,7 @@ import {config} from './ahoi-config'
 import * as AhoiClient from '../../ahoi-sdk/src/index'
 
 import {HttpService} from "../http.service";
+import {StorageService} from "../storage-service";
 
 class AhoiService {
 
@@ -24,6 +25,7 @@ class AhoiService {
 
 
     constructor(){
+        this.storageService = new StorageService()
         this.ahoiClient =  AhoiClient.ApiClient.instance
         this.ahoiClient.basePath = this.baseUrl + '/ahoi/api/v2'
         this.ahoiClient.setOAuthCredentials(this.baseUrl + '/auth/v1/oauth/token?grant_type=client_credentials',
