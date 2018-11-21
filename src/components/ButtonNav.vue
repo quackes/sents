@@ -1,8 +1,5 @@
 <template>
-  <v-card height="200px" flat>
-    <div class="headline text-xs-center pa-5">
-      Active: {{ bottomNav }}
-    </div>
+  <v-card flat>
     <v-bottom-nav
       :active.sync="bottomNav"
       :value="true"
@@ -12,39 +9,50 @@
       <v-btn
         color="teal"
         flat
-        value="recent"
+        value="overview"
+        to="/"
       >
-        <span>Recent</span>
+        <span>Übersicht</span>
         <v-icon>history</v-icon>
       </v-btn>
 
       <v-btn
         color="teal"
         flat
-        value="favorites"
+        value="earn"
       >
-        <span>Favorites</span>
+        <span>Verdienen</span>
         <v-icon>favorite</v-icon>
       </v-btn>
 
       <v-btn
         color="teal"
         flat
-        value="nearby"
+        value="wish"
+        to="/wish"
       >
-        <span>Nearby</span>
+        <span>Wunsch</span>
+        <v-icon>place</v-icon>
+      </v-btn>
+
+      <v-btn
+        color="teal"
+        flat
+        value="settings"
+      >
+        <span>Einstellungen</span>
         <v-icon>place</v-icon>
       </v-btn>
     </v-bottom-nav>
   </v-card>
 </template>
 <script>
-  export default {
-    name: "ButtonNav",
-    data () {
-      return {
-        bottomNav: 'recent'
-      }
-    }
+export default {
+  name: "ButtonNav",
+  data() {
+    return {
+      bottomNav: "recent"
+    };
   }
+};
 </script>

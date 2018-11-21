@@ -9,10 +9,12 @@
     "update": "npm install --no-save && npm update --no-save && npm outdated"
   },
   "dependencies": {
+    "axios": "^0.18.0",
     "base64url": "^3.0.0",
     "crypto-js": "^3.1.9-1",
     "node-rsa": "^1.0.1",
     "rx-dom-ajax": "^7.0.3",
+    "rxjs": "^6.3.3",
     "superagent": "^4.0.0",
     "vue": "^2.5.17",
     "vue-currency-filter": "^3.2.0",

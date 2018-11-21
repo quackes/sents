@@ -4,6 +4,7 @@ import Rx from 'rx-dom-ajax';
 export class HttpService {
 
   request( method, url, payload, headers) {
+    headers = headers || {}
     return new Promise((resolve, reject) => {
       Rx.DOM.ajax({
         body: payload,
