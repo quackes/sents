@@ -17,7 +17,6 @@ import Wish from "./components/pages/Wish.vue";
 import Earn from "./components/pages/Earn.vue";
 import Settings from "./components/pages/Settings.vue";
 
-
 Vue.config.productionTip = false;
 
 Vue.use(VueRx);

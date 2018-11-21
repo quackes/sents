@@ -1,6 +1,7 @@
 import { Child, Parent } from './role';
+import { Uuid } from './uuid';
 
-export class Task {
+export class Task extends Uuid {
   _done = false;
   _paid = false;
   _title = 'Aufgabe';
@@ -10,6 +11,7 @@ export class Task {
   _icon = require('../assets/icon-dog.png');
 
   constructor(title, amount, parent) {
+    super();
     this.title = title;
     this.amount = amount;
     this.parent = parent;

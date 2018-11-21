@@ -1,15 +1,17 @@
 
 import injector from 'vue-inject';
 import '../services/ahoi/ahoi-service';
+import { Uuid } from './uuid';
 
 let ahoiService = injector.get('ahoiService');
 console.log(ahoiService);
 
-export class BankAccount {
+export class BankAccount extends Uuid {
   iban = '';
   bic = '';
 
   constructor(iban, bic) {
+    super();
     this.iban = iban;
     this.bic = bic;
   }

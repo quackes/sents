@@ -1,12 +1,14 @@
 import { Task } from './task';
 import { Parent } from './role';
+import { Uuid } from './uuid';
 
-export class ParentTaskList {
+export class ParentTaskList extends Uuid {
   
   _parent = null;
   _tasks = [];
 
   constructor(parent, tasks = []) {
+    super();
     this.parent = parent;
     this.tasks = tasks;
   }

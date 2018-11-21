@@ -1,13 +1,15 @@
 import { BankAccount } from './bank-account';
 import { Wish } from './wish';
+import { Uuid } from './uuid';
 
-class Role {
+class Role extends Uuid {
   _gender = 'male';
   _firstname = '';
   _lastname = '';
   _bankAccount = null;
 
   constructor(gender, firstname, bankAccount) {
+    super();
     this.gender = gender;
     this.firstname = firstname;
     this.lastname = '';

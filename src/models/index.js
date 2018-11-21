@@ -4,7 +4,6 @@ import { Task } from './task';
 import { Wish } from './wish';
 import { Completion } from './completion';
 
-
 export * from './bank-account';
 export * from './role';
 export * from './task';
@@ -46,3 +45,8 @@ export const DATA = {
 };
 
 // console.log(JSON.stringify(DATA));
+StorageService.put(DATA).then(() => {
+  StorageService.get().then(data => {
+    console.log(data);
+  });
+});
