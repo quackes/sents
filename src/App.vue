@@ -2,6 +2,7 @@
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png">
     <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <button v-on:click="test">test</button>
   </div>
 </template>
 
@@ -12,9 +13,15 @@ var a = '';
 
 export default {
   name: 'app',
+    dependencies : ['ahoiService'],
   components: {
     HelloWorld
-  }
+  },
+    methods: {
+        test: function(){
+            this.ahoiService.init()
+        }
+    }
 }
 </script>
 
