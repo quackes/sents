@@ -5,13 +5,10 @@ import {config} from './ahoi-config'
 
 import * as AhoiClient from '../../ahoi-sdk/src/index'
 
-let btoa: any;
-
 import {HttpService} from "../http.service";
 
 class AhoiService {
 
-    httpClient = injector.get('HttpService');
 
     baseUrl = 'https://banking-sandbox.starfinanz.de'
 
@@ -61,8 +58,8 @@ class AhoiService {
         })
     }
 
-    init(): Promise<any> {
-        this.getInstallationId()
+    init(){
+        return this.getInstallationId()
             .then(()=>{
                 return new Promise((resolve, reject) => {
                     new AhoiClient.ProviderApi().getProviders(null, (error, data)=>{
@@ -105,11 +102,87 @@ class AhoiService {
                                     return account.iban === config.childAccountIban
                                 })[0]
 
-                            console.log(this.parentAccount, this.childAccount)
+                            resolve(this)
                         })
                 })
             })
 
+    }
+
+    transfer(transactionDef) {
+        if(!this.parentAccount || !this.childAccount){
+            return Promise.reject('No parent or child account set')
+        }
+
+        let amount = 100
+        let purpose = "TEst"
+
+        let transfer = {
+            "iban" : this.childAccount.iban,
+            "bic" : this.childAccount.bic,
+            "name" : this.childAccount.owner,
+            "amount" : {
+                "value" : amount,
+                "currency" : "EUR"
+            },
+            "purpose" : purpose
+        }
+
+        return new Promise((resolve, reject) => {
+            new AhoiClient.TransferApi()
+                .postTransfer(this.bankingAccess.id, this.parentAccount.id, transfer, (error, data) =>{
+                    if(error){
+                        reject(error);
+                        return;
+                    }
+
+                    pollState(data.id)
+                        .then(()=>{
+                            return new AhoiClient.TaskApi()
+                                .getChallenge(data.id, (error, data)=>{
+                                    console.log(data);
+                                })
+                        })
+
+                })
+        });
+
+        function pollState(taskId){
+
+            return new Promise((resolve, reject) => {
+                pollFn(resolve, reject)
+            });
+
+            function pollFn(resolve, reject){
+                getTaskStatus()
+                    .then((taskStatus)=>{
+                        if(taskStatus.state === 'AUTHORIZATION_PENDING'){
+                            resolve()
+                        }else if(taskStatus.state === 'FAILED'){
+                            reject(taskStatus)
+                        }
+                        else {
+                            setTimeout(()=> pollFn(resolve, reject) , 500)
+                        }
+
+                    })
+                    .catch(reject)
+            }
+
+            function getTaskStatus(){
+                return new Promise((resolve, reject) => {
+                    new AhoiClient.TaskApi()
+                        .getTask(taskId, (error, data) =>{
+                            if(error){
+                                reject(error);
+                                return;
+                            }
+
+                            resolve(data);
+                        })
+                })
+            }
+        }
 
     }
 }
