@@ -1,7 +1,7 @@
 module.exports = {
   plugins: [
     'transform-flow-strip-types',
-    // 'transform-vue-template'
+    'transform-vue-template'
   ],
   presets: [
     [

@@ -14,5 +14,5 @@ Vue.use(require('vue-currency-filter'));
 Vue.use(require('vue-moment'));
 
 new Vue({
-  render: h => h(App),
+  render: (h: any): any => h(App),
 }).$mount('#app');
