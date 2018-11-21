@@ -9,14 +9,13 @@ pipeline{
     stage ('install modules'){
       steps{
         sh '''
-          # npm install
+          npm install
         '''
       }
     }
     stage ('build') {
       steps{
-        //   sh 'npm run build'
-        sh 'mkdir dist && cp index.html dist/'
+          sh 'npm run build'
           stash includes: 'dist/**', name: 'webapp'
       }
     }
