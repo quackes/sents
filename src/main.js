@@ -1,5 +1,4 @@
 // @flow
-
 import '@babel/polyfill';
 import Vue from 'vue';
 import './plugins/vuetify';
@@ -8,9 +7,13 @@ import VueRouter from 'vue-router';
 import App from './App.vue'
 import './pipes/currency';
 import './pipes/percent';
-import Dashboard from './components/pages/Dashboard.vue';
+import Welcome from "./components/pages/Welcome.vue";
+import Dashboard from "./components/pages/Dashboard.vue";
 import Wish from "./components/pages/Wish.vue";
+import Earn from "./components/pages/Earn.vue";
+import Settings from "./components/pages/Settings.vue";
 import { DATA } from './models';
+
 
 Vue.config.productionTip = false;
 
@@ -23,8 +26,11 @@ const router = new VueRouter({
   mode: "history",
   base: __dirname,
   routes: [
-    { path: "/", component: Dashboard },
-    { path: "/wish", component: Wish }
+    { path: "/", component: Welcome },
+    { path: "/dashboard", component: Dashboard },
+    { path: "/wish", component: Wish },
+    { path: "/earn", component: Earn },
+    { path: "/settings", component: Settings }
   ]
 });
 
