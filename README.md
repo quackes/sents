@@ -1,8 +1,8 @@
 # test
 
-## Project setup
+## Project setup or update
 ```
-npm install
+npm run update
 ```
 
 ### Compiles and hot-reloads for development
