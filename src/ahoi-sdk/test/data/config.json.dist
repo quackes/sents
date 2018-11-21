@@ -1,0 +1,17 @@
+{
+  "oauth" : {
+    "url" : "https://banking-sandbox.starfinanz.de/auth/oauth/token?grant_type=client_credentials",
+    "clientId" : "<clientId>",
+    "clientSecret" : "<clientSecret>",
+    "appSecretIv" : "<appSecretIv>",
+    "appSecretKey" : "<appSecretKey>"
+  },
+  "ahoi" : {
+    "url" : "https://banking-sandbox.starfinanz.de/ahoi/api/v2",
+    "access": {
+      "bankCode" : "99994000",
+      "userName" : "<userName>",
+      "pin" : "<pin>"
+    }
+  }
+}
