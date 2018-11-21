@@ -4,13 +4,13 @@
       :active.sync="bottomNav"
       :value="true"
       absolute
-      color="transparent"
+      color="white"
     >
       <v-btn
         color="teal"
         flat
         value="overview"
-        to="/"
+        to="/dashboard"
       >
         <span>Übersicht</span>
         <v-icon>history</v-icon>
@@ -20,6 +20,7 @@
         color="teal"
         flat
         value="earn"
+        to="/earn"
       >
         <span>Verdienen</span>
         <v-icon>favorite</v-icon>
@@ -39,6 +40,7 @@
         color="teal"
         flat
         value="settings"
+        to="/settings"
       >
         <span>Einstellungen</span>
         <v-icon>place</v-icon>

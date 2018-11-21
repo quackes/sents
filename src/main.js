@@ -1,5 +1,4 @@
 // @flow
-
 import '@babel/polyfill';
 import Vue from 'vue';
 import './plugins/vuetify';
@@ -9,10 +8,14 @@ import App from './App.vue';
 import './pipes/currency';
 import './pipes/percent';
 import './services/ahoi/ahoi-service';
-import Dashboard from './components/pages/Dashboard.vue';
-import Wish from './components/pages/Wish.vue';
+import Welcome from "./components/pages/Welcome.vue";
+import Dashboard from "./components/pages/Dashboard.vue";
+import Wish from "./components/pages/Wish.vue";
+import Earn from "./components/pages/Earn.vue";
+import Settings from "./components/pages/Settings.vue";
 import { DATA } from './models';
 import VueRx from 'vue-rx';
+
 
 Vue.config.productionTip = false;
 
@@ -25,7 +28,13 @@ Vue.use(require('vue-moment'));
 const router = new VueRouter({
   mode: 'history',
   base: __dirname,
-  routes: [{ path: '/', component: Dashboard }, { path: '/wish', component: Wish }]
+  routes: [
+    { path: "/", component: Welcome },
+    { path: "/dashboard", component: Dashboard },
+    { path: "/wish", component: Wish },
+    { path: "/earn", component: Earn },
+    { path: "/settings", component: Settings }
+  ]
 });
 
 window.ahoi
