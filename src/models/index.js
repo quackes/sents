@@ -4,6 +4,7 @@ import { Task } from './task';
 import { Wish } from './wish';
 import { Completion } from './completion';
 
+
 export * from './bank-account';
 export * from './role';
 export * from './task';
@@ -13,6 +14,7 @@ const SOHN = new Child('male', 'Maik', new BankAccount('DE00999940000000001135',
   new Wish('Fahrrad', 45500),
   new Wish('Snowboard', 21500)
 ]);
+console.log(SOHN);
 SOHN.ratio = 25;
 const MUTTER = new Parent('female', 'Sabrina', new BankAccount('DE00999940000000001128', 'TESTBICXXXX'));
 const VATER = new Parent('male', 'David', new BankAccount('DE00999940000000001128', 'TESTBICXXXX'));

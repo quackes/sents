@@ -144,7 +144,7 @@ class AhoiService {
                     }
                 })
         }).then(account => {
-            return account.balance.amount
+            return account.balance.amount.value
         })
     }
 

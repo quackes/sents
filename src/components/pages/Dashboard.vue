@@ -37,6 +37,7 @@
       <v-flex xs5>
         <b>Freizeit</b><br>
         {{freeAmount|currency}}
+        {{accountAmount|currency}}
       </v-flex>
       <v-flex xs2>
         <small><i>...</i></small>
@@ -57,6 +58,7 @@
 import { TASKS, USERS, COMPLETIONS }from '../../models/';
 import { Task } from '../../models/'
 import { getFreeAmount, getWishAmount, getOpenAmount, getFullAmount, numberOfOpenTasks } from '../../services/helper.service';
+import '../../services/ahoi/ahoi-service';
 
 console.log(USERS);
 
@@ -68,6 +70,12 @@ export default {
       user: USERS[0]
     }
   },
+  subscriptions () {
+    return {
+      accountAmount: window.ahoi.saldo(USERS[0].bankAccount.iban)
+    }
+  },
+  dependencies : ['ahoiService'],
   computed: {
     numberOfOpenTasks: function() {
       return numberOfOpenTasks();

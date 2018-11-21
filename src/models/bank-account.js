@@ -1,5 +1,11 @@
+
+import injector from 'vue-inject';
+import '../services/ahoi/ahoi-service';
+
+let ahoiService = injector.get('ahoiService');
+console.log(ahoiService);
+
 export class BankAccount {
-  amount = 0;
   iban = '';
   bic = '';
 
@@ -38,6 +44,6 @@ export class BankAccount {
     }
   }
   get amount() {
-    return this._amount;
+    return ahoiService.saldo(this.iban);
   }
 }
