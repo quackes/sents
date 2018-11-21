@@ -1,7 +1,7 @@
 import { Child, Parent } from "./role";
 
 export class Task {
-  _open = true;
+  _done = true;
   _paid = false;
   _title = 'Aufgabe';
   _amount = 0;
@@ -14,16 +14,16 @@ export class Task {
     this.parent = parent;
   }
 
-  close() {
-    this._open = false;
+  done() {
+    this._done = false;
   }
 
   reopen() {
-    this._open = true;
+    this._done = true;
   }
 
   get open() {
-    return this._open;
+    return this._done;
   }
 
   get paid() {

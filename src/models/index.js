@@ -23,7 +23,7 @@ export const USERS = [
 
 export const TASKS = [
   new Task('Garage aufräumen', 1500, MUTTER),
-  new Task('Gassi gehen', 300, VATER),
+  new Task('Gassi gehen', 300, VATER).done(),
   new Task('Rasen mähen', 2000, VATER),
   new Task('Wäsche aufhängen', 300, MUTTER)
 ];
