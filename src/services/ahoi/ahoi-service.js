@@ -3,27 +3,19 @@ import injector from 'vue-inject';
 
 import { config } from './ahoi-config';
 
-<<<<<<< HEAD
-import * as AhoiClient from '../../ahoi-sdk/src/index';
-=======
 import * as AhoiClient from '../../ahoi-sdk/src/index'
 
 import {HttpService} from "../http.service";
->>>>>>> 045a5a3d13f5ea04fafc572053cbb4653d46519a
 
 class AhoiService {
   httpClient = injector.get('HttpService');
 
-<<<<<<< HEAD
-  baseUrl = 'https://banking-sandbox.starfinanz.de';
-=======
 
     baseUrl = 'https://banking-sandbox.starfinanz.de'
 
     installationId = null;
 
     bankingAccess = null;
->>>>>>> 045a5a3d13f5ea04fafc572053cbb4653d46519a
 
   installationId = null;
 
@@ -88,41 +80,6 @@ class AhoiService {
                   USERNAME: config.ahoiAccessFields.USERNAME,
                   PIN: config.ahoiAccessFields.PIN
                 }
-<<<<<<< HEAD
-              },
-              (error, data) => {
-                if (error) {
-                  reject(error);
-                  return;
-                }
-                this.bankingAccess = data;
-                resolve(data);
-              }
-            );
-          });
-        });
-      })
-      .then(access => {
-        return new Promise((resolve, reject) => {
-          new AhoiClient.AccountApi().getAccounts(access.id, (error, data) => {
-            if (error) {
-              reject(error);
-              return;
-            }
-            console.log(data);
-            this.parentAccount = data.filter(account => {
-              return account.iban === config.parentAccountIban;
-            })[0];
-            this.childAccount = data.filter(account => {
-              return account.iban === config.childAccountIban;
-            })[0];
-
-            console.log(this.parentAccount, this.childAccount);
-          });
-        });
-      });
-  }
-=======
 
                 this.ahoiClient.oAuthClient.setInstallationId(this.installationId)
                 resolve(data.installation);
@@ -262,7 +219,6 @@ class AhoiService {
         }
 
     }
->>>>>>> 045a5a3d13f5ea04fafc572053cbb4653d46519a
 }
 
 injector.service('ahoiService', AhoiService);
