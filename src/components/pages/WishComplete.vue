@@ -18,7 +18,9 @@
     </v-layout>
     <v-layout row justify-center>
       <v-flex xs12 text-xs-center>
-        <v-btn large color="primary">Wunsch erfüllen</v-btn>
+          <router-link to="/celebrate">
+            <v-btn large color="primary">Wunsch erfüllen</v-btn>
+          </router-link>
       </v-flex>
     </v-layout>
   </v-container>
