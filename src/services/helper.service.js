@@ -4,6 +4,10 @@ import { Completion } from '../models/completion';
 export function getClosedTasks(tasks) {
   return tasks.filter((t)=>t.isDone())
 }
+export function getOpenTasks(tasks) {
+  return tasks.filter((t)=>t.isDone() === false)
+}
+
 export function numberOfOpenTasks(tasks) {
   let counter = 0;
   tasks.forEach((task) => {

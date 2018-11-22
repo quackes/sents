@@ -12,25 +12,34 @@ export class Task extends Uuid {
   _child = null;
   _icon = require('../assets/icon-dog.png');
 
-  constructor(title, amount, parent) {
+  constructor(title, amount, parent, icon) {
     super();
     this.title = title;
     this.amount = amount;
     this.parent = parent;
+    this.icon = icon;
   }
 
   static create(properties) {
     if (!(CACHE[properties.uuid] instanceof Task)) {
-      CACHE[properties.uuid] = new Task(properties._title, properties._amount, Role.create(properties._parent));
+      CACHE[properties.uuid] = new Task(
+        properties._title,
+        properties._amount,
+        Role.create(properties._parent),
+        properties._icon
+      );
       CACHE[properties.uuid]._done = properties._done;
       CACHE[properties.uuid]._paid = properties._paid;
       if (properties._child !== null) {
         CACHE[properties.uuid]._child = Role.create(properties._child);
       }
-      CACHE[properties.uuid]._icon = properties._icon;
     }
     CACHE[properties.uuid].uuid = properties.uuid;
     return CACHE[properties.uuid];
+  }
+
+  set icon(icon) {
+    this._icon = icon;
   }
 
   get icon() {
