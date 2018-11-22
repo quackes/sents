@@ -68,6 +68,19 @@ export default {
       icon2: require("../../assets/icon-playstation.png"),
       icon3: require("../../assets/icon-hero.png")
     };
+  },
+  dependencies: ["DataService"],
+  mounted: function () {
+    this.DataService.restore()
+      .then((data) => {
+        console.log(data);
+        this.completions = data.completions;
+        this.tasks = data.tasks;
+        this.user = data.users[0];
+      })
+      .catch((error) => {
+        console.warn(error);
+      });
   }
 };
 </script>

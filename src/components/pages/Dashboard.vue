@@ -88,8 +88,6 @@
   </div>
 </template>
 <script>
-import { TASKS, USERS, COMPLETIONS } from "../../models/";
-import { Task } from "../../models/";
 import {
   getFreeAmount,
   getWishAmount,
@@ -99,14 +97,13 @@ import {
 } from "../../services/helper.service";
 import "../../services/ahoi/ahoi-service";
 
-console.log(USERS);
-
 export default {
   name: "Dashboard",
   data() {
     return {
-      tasks: TASKS,
-      user: USERS[0]
+      completions: [],
+      user: {},
+      tasks: []
     };
   },
   subscriptions() {
@@ -114,22 +111,34 @@ export default {
       accountAmount: window.ahoi.saldo("DE00999940000000001135")
     };
   },
-  dependencies: ["ahoiService"],
+  dependencies: ["ahoiService", "DataService"],
+  mounted: function () {
+    this.DataService.restore()
+      .then((data) => {
+        console.log(data);
+        this.completions = data.completions;
+        this.tasks = data.tasks;
+        this.user = data.users[0];
+      })
+      .catch((error) => {
+        console.warn(error);
+      });
+  },
   computed: {
     numberOfOpenTasks: function() {
       return numberOfOpenTasks();
     },
     openAmount: function() {
-      return getOpenAmount(COMPLETIONS, this.user);
+      return getOpenAmount(this.completions, this.user);
     },
     fullAmount: function() {
-      return getFullAmount(COMPLETIONS, this.user);
+      return getFullAmount(this.completions, this.user);
     },
     freeAmount: function() {
-      return getFreeAmount(COMPLETIONS, this.user);
+      return getFreeAmount(this.completions, this.user);
     },
     wishAmount: function() {
-      return getWishAmount(COMPLETIONS, this.user);
+      return getWishAmount(this.completions, this.user);
     }
   }
 };

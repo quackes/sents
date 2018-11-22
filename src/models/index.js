@@ -5,6 +5,7 @@ import { Wish } from './wish';
 import { Completion } from './completion';
 
 export * from './bank-account';
+export * from './completion';
 export * from './role';
 export * from './task';
 export * from './transaction';
@@ -48,7 +49,7 @@ let completion = new Completion(MUTTER, DONE_TASKS);
 
 export const COMPLETIONS = [completion];
 
-export let DATA = {
+export const DATA = {
   completions: COMPLETIONS,
   users: USERS,
   tasks: TASKS
@@ -65,23 +66,23 @@ export let DATA = {
 //   console.log(Role.create(user));
 // });
 
-StorageService.put(DATA).then(() => {
-  StorageService.get().then(data => {
-    DATA.completions = [];
-    data.completions.forEach(completion => {
-      DATA.completions.push(Completion.create(completion));
-    });
+// StorageService.put(DATA).then(() => {
+//   StorageService.get().then(data => {
+//     DATA.completions = [];
+//     data.completions.forEach(completion => {
+//       DATA.completions.push(Completion.create(completion));
+//     });
     
-    DATA.tasks = [];
-    data.tasks.forEach(task => {
-      DATA.tasks.push(Task.create(task));
-    });
+//     DATA.tasks = [];
+//     data.tasks.forEach(task => {
+//       DATA.tasks.push(Task.create(task));
+//     });
     
-    DATA.users = [];
-    data.users.forEach(user => {
-      DATA.users.push(Role.create(user));
-    });
+//     DATA.users = [];
+//     data.users.forEach(user => {
+//       DATA.users.push(Role.create(user));
+//     });
 
-    console.log(DATA);
-  });
-});
+//     console.log(DATA);
+//   });
+// });
