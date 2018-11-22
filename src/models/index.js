@@ -78,3 +78,5 @@ export const DATA = {
   users: USERS,
   tasks: TASKS
 };
+
+console.log(JSON.stringify(DATA));
