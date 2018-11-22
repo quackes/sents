@@ -45,7 +45,7 @@ export const DONE_TASKS = [
   new Task("Gassi gehen", 300, MUTTER, require("../assets/icon-dog.png")),
   new Task("Zimmer aufräumen", 500, MUTTER, require("../assets/icon-clean.png")),
   new Task("Gassi gehen", 300, MUTTER, require("../assets/icon-dog.png")),
-  new Task("Zimmer aufräumen", 500, MUTTER, require("../assets/icon-clean.png")),
+  new Task("Obstbäume schneiden", 3000, MUTTER, require("../assets/icon-clean.png")),
   new Task("Gassi gehen", 300, MUTTER, require("../assets/icon-dog.png")),
   new Task("Zimmer aufräumen", 500, MUTTER, require("../assets/icon-clean.png")),
   new Task("Gassi gehen", 300, MUTTER, require("../assets/icon-dog.png")),
