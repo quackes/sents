@@ -135,9 +135,11 @@ export default {
         Promise.all(transferPromises).then(resolve, reject);
       })
         .then(() => {
-          this.completion = new Completion(USERS[1]);
           this.loading = false;
+          this.completions.push(this.completion)
           this.DataService.store();
+
+            this.completion = new Completion(this.user);
         })
         .catch(() => (this.loading = false));
     },
