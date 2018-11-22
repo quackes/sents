@@ -58,9 +58,11 @@
                 <v-layout row>
                   <v-flex>
                     <h2 class="dramatic-red">{{user.ratio|percent}}</h2>
+                    Freizeit
                   </v-flex>
                   <v-flex>
                   <h2 class="dramatic-red">{{user.invRatio|percent}}</h2>
+                  Sparen
                 </v-flex>
                 </v-layout>
             </v-card-text>
