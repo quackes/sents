@@ -42,6 +42,11 @@ export default {
   overflow-y: scroll;
   backface-visibility: hidden;
 }
+
+.spacer {
+  margin-top: 32px;
+}
+
 .container {
   padding-left: 8px;
   padding-right: 8px;
@@ -54,21 +59,61 @@ body {
 .application {
   font-family: "Nunito", sans-serif;
   font-weight: 700;
+  background-color: white !important;
 }
 
 .v-toolbar__title {
   font-weight: 900;
 }
 
+.v-toolbar {
+  background-color: white !important;
+  box-shadow: none;
+}
+
 .v-btn__content {
   font-weight: 900;
 }
 
+.v-list__tile__title {
+  font-weight: 700;
+}
+.v-card {
+  border-radius: 8px;
+}
 .dramatic {
   font-weight: 900;
 }
 .dramatic-red {
   font-weight: 900;
   color: #ea3468;
+}
+.dramatic-blue {
+  font-weight: 900;
+  color: #1c47f1;
+}
+.dramatic-yellow {
+  font-weight: 900;
+  color: #fade4b;
+}
+
+.text-white {
+  color: white !important;
+}
+.text-red {
+  color: #ea3468 !important;
+}
+
+.huge-text {
+  font-size: 56px;
+}
+
+#open-tasks {
+  border: 10px solid #fade4b;
+  border-radius: 100px;
+}
+
+.text-left {
+  text-align: left !important;
 }
 </style>
