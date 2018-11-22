@@ -6,19 +6,19 @@
   <v-container grid-list-md text-xs-center>
     <v-layout row>
       <v-flex xs12>
-        <v-card color="yellow">
+        <v-card color="white">
           <v-card-text>
             <v-layout row align-center>
               <v-flex xs5>
                 <h5>Offene Aufgaben</h5>
-                <h1>{{numberOfOpenTasks}}</h1>
+                <h1 class="dramatic-red">{{numberOfOpenTasks}}</h1>
               </v-flex>
               <v-flex xs2>
                 <v-icon>arrow_right_alt</v-icon>
               </v-flex>
               <v-flex xs5>
                 <h5> Zu verdienen</h5>
-                <h1>{{openAmount|currency}}</h1>
+                <h1 class="dramatic-red">{{openAmount|currency}}</h1>
               </v-flex>
             </v-layout>
           </v-card-text>
@@ -28,7 +28,7 @@
       
      <v-layout row>
         <v-flex xs12>
-          <v-card color="yellow">
+          <v-card color="white">
             <v-card-text>
               <v-layout row justify-center>
                 <v-flex xs12>
@@ -37,7 +37,7 @@
               </v-layout>
                 <v-layout row>
                   <v-flex xs12>
-                    <v-slider v-model="user.ratio"></v-slider>
+                    <v-slider thumb-color="primary" v-model="user.ratio"></v-slider>
                   </v-flex>
                 </v-layout>
                 <v-layout row>
@@ -45,7 +45,7 @@
                     <b>{{user.ratio|percent}}</b>
                   </v-flex>
                   <v-flex>
-                  {{user.invRatio|percent}}
+                  <b>{{user.invRatio|percent}}</b>
                 </v-flex>
                 </v-layout>
             </v-card-text>
@@ -55,34 +55,31 @@
 
     <v-layout row>
       <v-flex xs12>
-        <v-card color="yellow">
+        <v-card color="white">
           <v-card-text>
             <v-layout row>
               <v-flex xs12>
                 <h2>Statistik</h2>
               </v-flex>
             </v-layout>
+            <v-layout row>
+              <v-flex xs4>
+                <h5>Freizeit</h5>
+                <h3 class="dramatic-red">{{accountAmount|currency}}</h3>
+              </v-flex>
+              <v-flex xs4>
+                  <h5>Gespart</h5>
+                  <h3 class="dramatic-red">{{wishAmount|currency}}</h3>
+              </v-flex>
+              <v-flex xs4>
+                  <h5>Gesamt</h5>
+                  <h3 class="dramatic-red">{{fullAmount|currency}}</h3>
+              </v-flex>
+            </v-layout>
           </v-card-text>
         </v-card>
       </v-flex>
     </v-layout>
-      
-      <v-flex xs5>
-        <b>Freizeit</b><br>
-        <!-- {{freeAmount|currency}} -->
-        {{accountAmount|currency}}
-      </v-flex>
-      <v-flex xs2>
-        <small><i>...</i></small>
-      </v-flex>
-      <v-flex xs5>
-        <b>Gespart</b><br>
-        {{wishAmount|currency}}
-      </v-flex>
-      <v-flex xs12>
-        <b>Verdient gesamt</b><br>
-        {{fullAmount|currency}}
-      </v-flex>
   </v-container>
   </div>
 </template>
@@ -110,8 +107,8 @@ export default {
   },
   subscriptions() {
     return {
-      accountAmount: window.ahoi.saldo('DE00999940000000001135')
-    }
+      accountAmount: window.ahoi.saldo("DE00999940000000001135")
+    };
   },
   dependencies: ["ahoiService"],
   computed: {

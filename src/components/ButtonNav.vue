@@ -7,46 +7,46 @@
       color="white"
     >
       <v-btn
-        color="teal"
+        color="primary"
         flat
         value="overview"
         to="/dashboard"
       >
         <span>Übersicht</span>
-        <v-icon>history</v-icon>
+        <v-icon>account_balance_wallet</v-icon>
       </v-btn>
 
       <v-btn
-        color="teal"
+        color="primary"
         flat
         value="earn"
         to="/earn"
       >
         <span>Verdienen</span>
-        <v-icon>favorite</v-icon>
+        <v-icon>fitness_center</v-icon>
       </v-btn>
 
       <v-btn
-        color="teal"
+        color="primary"
         flat
         value="wish"
         to="/wish"
       >
         <span>Wunsch</span>
-        <v-icon>place</v-icon>
+        <v-icon>flag</v-icon>
       </v-btn>
 
       <v-btn
-        color="teal"
+        color="primary"
         flat
         value="settings"
         to="/settings"
       >
         <span>Einstellungen</span>
-        <v-icon>place</v-icon>
+        <v-icon>settings</v-icon>
       </v-btn>
       <v-btn
-        color="teal"
+        color="primary"
         flat
         value="cash-up"
         to="/cash-up"

@@ -24,6 +24,7 @@ Vue.config.productionTip = false;
 Vue.use(VueRx);
 Vue.use(injector);
 Vue.use(VueRouter);
+
 Vue.use(require("vue-currency-filter"));
 Vue.use(require("vue-moment"));
 

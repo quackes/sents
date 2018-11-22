@@ -24,7 +24,6 @@
             <v-layout row>
                 <v-flex xs12>
                     <v-text-field
-                    v-model="password"
                     hint="At least 8 characters"
                     placeholder="Password"
                     type="password"
