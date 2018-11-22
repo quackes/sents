@@ -4,6 +4,11 @@ import { Completion } from '../models/completion';
 export function getClosedTasks(tasks) {
   return tasks.filter((t)=>t.isDone())
 }
+
+
+export function getTasksToAccept(tasks) {
+    return tasks.filter((t)=>t.isDone() && !t.isPaid())
+}
 export function getOpenTasks(tasks) {
   return tasks.filter((t)=>t.isDone() === false)
 }

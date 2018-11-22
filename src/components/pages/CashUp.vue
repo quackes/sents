@@ -79,7 +79,7 @@
     </div>
 </template>
 <script>
-import { getClosedTasks } from "../../services/helper.service";
+import { getClosedTasks , getTasksToAccept} from "../../services/helper.service";
 import { Completion } from "../../models/completion";
 import { USERS } from "../../models";
 
@@ -101,7 +101,7 @@ export default {
         console.log(data);
         this.completions = data.completions;
         this.tasks = data.tasks;
-        this.user = data.users[0];
+        this.user = data.users[1];
         this.completion = new Completion(this.user);
       })
       .catch(error => {
@@ -110,7 +110,7 @@ export default {
   },
   computed: {
     closedTask: function() {
-      return getClosedTasks(this.tasks).filter(t => this.completion.tasks.indexOf(t) < 0);
+      return getTasksToAccept(this.tasks).filter(t => this.completion.tasks.indexOf(t) < 0);
     }
   },
   methods: {
@@ -118,7 +118,7 @@ export default {
       // this.completion.addTask(task);
     },
     addAll: function() {
-      getClosedTasks(this.tasks).forEach(t => {
+        getTasksToAccept(this.tasks).forEach(t => {
         this.completion.addTask(t);
       });
     },
@@ -128,13 +128,18 @@ export default {
         let transactions = this.completion.transactions;
         let transferPromises = [];
         Object.keys(transactions).forEach(key => {
-          transferPromises.push(window.ahoi.transfer(transactions[key]));
+            let t = transactions[key];
+            t.tasks.forEach(t => t.paid())
+          transferPromises.push(window.ahoi.transfer(t));
         });
         Promise.all(transferPromises).then(resolve, reject);
       })
         .then(() => {
-          this.completion = new Completion(USERS[1]);
           this.loading = false;
+          this.completions.push(this.completion)
+          this.DataService.store();
+
+            this.completion = new Completion(this.user);
         })
         .catch(() => (this.loading = false));
     },

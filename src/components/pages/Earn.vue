@@ -107,7 +107,7 @@ export default {
         let index = this.tasks.indexOf(task);
         if (index >= 0) {
             this.tasks[index].done();
-            this.tasks[index].client = this.user;
+            this.tasks[index].child = this.user;
             this.openTasks = getOpenTasks( this.tasks);
             this.closedTasks = getClosedTasks( this.tasks);
             this.DataService.store();

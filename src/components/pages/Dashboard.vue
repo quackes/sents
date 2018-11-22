@@ -21,7 +21,9 @@
               <h2 class="dramatic text-left">Offene Aufgaben 💪</h2>
             <v-layout row align-center>
               <v-flex xs5>
-                <h1 id="open-tasks" class="dramatic-yellow huge-text">{{numberOfOpenTasks}}</h1>
+                <router-link to="/earn">
+                  <h1 id="open-tasks" class="dramatic-yellow huge-text">{{numberOfOpenTasks}}</h1>
+                </router-link>
               </v-flex>
               <v-flex xs2>
                 <v-icon color="secondary">arrow_right_alt</v-icon>
@@ -56,9 +58,11 @@
                 <v-layout row>
                   <v-flex>
                     <h2 class="dramatic-red">{{user.ratio|percent}}</h2>
+                    Freizeit
                   </v-flex>
                   <v-flex>
                   <h2 class="dramatic-red">{{user.invRatio|percent}}</h2>
+                  Sparen
                 </v-flex>
                 </v-layout>
             </v-card-text>
@@ -87,7 +91,7 @@
               </v-flex>
               <v-flex xs4>
                   <h3>Wunsch</h3>
-                  <router-link to="/wish-complete">
+                  <router-link to="/wish">
                     <h3 class="dramatic-yellow">{{wishAmount|currency}}</h3>
                   </router-link>
               </v-flex>
@@ -126,16 +130,14 @@ export default {
   },
   dependencies: ["ahoiService", "DataService"],
   mounted: function() {
-    this.DataService.restore()
-      .then(data => {
+    this.DataService.dataObs()
+        .subscribe(data => {
         console.log(data);
         this.completions = data.completions;
         this.tasks = data.tasks;
         this.user = data.users[0];
-      })
-      .catch(error => {
-        console.warn(error);
       });
+
   },
   computed: {
     numberOfOpenTasks: function() {
