@@ -11,7 +11,8 @@
             <v-flex xs12 >
             <v-text-field
                 outline
-                label="Name"
+                v-model="task.title"
+                label="Titel"
             ></v-text-field>
             </v-flex>
         </v-layout>
@@ -19,8 +20,9 @@
             <v-flex xs12 >
             <v-text-field
                 outline
+                readonly
                 label="Verantwortlich"
-                value="Mama"
+                v-model="user.firstname"
             ></v-text-field>
             </v-flex>
         </v-layout>
@@ -28,16 +30,16 @@
             <v-flex xs12 >
             <v-text-field
                 outline
-                label="Wie oft"
-                value="Nur einmal"
+                v-model="task.amount"
+                label="Belohnung"
+                type="number"
+                suffix="€"
             ></v-text-field>
             </v-flex>
         </v-layout>
         <v-layout row justify-center>
         <v-flex xs12 text-xs-center>
-          <router-link to="/earn">
-            <v-btn color="primary">Weiter</v-btn>
-          </router-link>
+            <v-btn color="primary" type="submit" v-on:click="save">Weiter</v-btn>
         </v-flex>
     </v-layout>
    </v-container>  
@@ -45,7 +47,38 @@
 </div>
 </template>
 <script>
+import { Task } from '../../models/task.js';
 export default {
-  name: "NewTask"
+  name: "NewTask",
+  data: function() {
+    return {
+        task: {
+            title: '',
+            amount: 3
+        },
+        user: {},
+        tasks: []
+    };
+  },
+  dependencies: ["DataService"],
+  mounted: function() {
+    this.DataService.restore()
+      .then(data => {
+        this.user = data.users[1];
+        this.tasks = data.tasks;
+      })
+      .catch(error => {
+        console.warn(error);
+      });
+  },
+  methods: {
+    save: function () {
+        this.tasks.push(new Task(this.task.title, parseInt(this.task.amount * 100), this.user , require("../../assets/icon-clean.png")));
+        this.DataService.store().
+        then(() => {
+            window.router.push('/earn')
+        });   
+    }
+  }
 };
 </script>

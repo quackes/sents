@@ -105,7 +105,7 @@ body {
 }
 
 .huge-text {
-  font-size: 56px;
+  font-size:36px;
 }
 
 #open-tasks {
