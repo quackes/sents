@@ -1,19 +1,25 @@
-
 import injector from 'vue-inject';
 import '../services/ahoi/ahoi-service';
 import { Uuid } from './uuid';
 
-let ahoiService = injector.get('ahoiService');
-console.log(ahoiService);
+const CACHE = {};
 
 export class BankAccount extends Uuid {
-  iban = '';
-  bic = '';
+  _iban = '';
+  _bic = '';
 
   constructor(iban, bic) {
     super();
     this.iban = iban;
     this.bic = bic;
+  }
+
+  static create(properties) {
+    if (!(CACHE[properties.uuid] instanceof BankAccount)) {
+      CACHE[properties.uuid] = new BankAccount(properties._iban, properties._bic);
+    }
+    CACHE[properties.uuid].uuid = properties.uuid;
+    return CACHE[properties.uuid];
   }
 
   set iban(iban) {
@@ -36,16 +42,5 @@ export class BankAccount extends Uuid {
   }
   get bic() {
     return this._bic;
-  }
-
-  set amount(amount) {
-    if (typeof amount === 'number') {
-      this._amount = amount;
-    } else {
-      throw 'Type error!';
-    }
-  }
-  get amount() {
-    return ahoiService.saldo(this.iban);
   }
 }

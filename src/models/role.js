@@ -2,31 +2,32 @@ import { BankAccount } from './bank-account';
 import { Wish } from './wish';
 import { Uuid } from './uuid';
 
-class Role extends Uuid {
-  _gender = 'male';
+const CACHE = {};
+
+export class Role extends Uuid {
   _firstname = '';
-  _lastname = '';
   _bankAccount = null;
 
-  constructor(gender, firstname, bankAccount) {
+  constructor(firstname, bankAccount) {
     super();
-    this.gender = gender;
     this.firstname = firstname;
-    this.lastname = '';
     this.bankAccount = bankAccount;
   }
 
-  set gender(gender) {
-    switch (gender) {
-      case '':
-        this._gender = 'male';
-        break;
-      default:
-        this._gender = 'female';
+  static create(properties) {
+    if (!(CACHE[properties.uuid] instanceof Role)) {
+      let bankAccount = BankAccount.create(properties._bankAccount);
+      if (properties.hasOwnProperty('_wishes')) {
+        CACHE[properties.uuid] = new Child(properties._firstname, bankAccount);
+        properties._wishes.forEach((wish) => {
+          CACHE[properties.uuid].addWish(Wish.create(wish));
+        });
+      } else {
+        CACHE[properties.uuid] = new Parent(properties._firstname, bankAccount);
+      }
     }
-  }
-  get gender() {
-    return this._gender;
+    CACHE[properties.uuid].uuid = properties.uuid;
+    return CACHE[properties.uuid];
   }
 
   set firstname(firstname) {
@@ -38,17 +39,6 @@ class Role extends Uuid {
   }
   get firstname() {
     return this._firstname;
-  }
-
-  set lastname(lastname) {
-    if (typeof lastname === 'string') {
-      this._lastname = lastname;
-    } else {
-      throw 'Type error!';
-    }
-  }
-  get lastname() {
-    return this._lastname;
   }
 
   set bankAccount(bankAccount) {
@@ -66,8 +56,8 @@ export class Child extends Role {
   _ratio = 50;
   _wishes = [];
 
-  constructor(gender, firstname, bankAccount, wishes = []) {
-    super(gender, firstname, bankAccount);
+  constructor(firstname, bankAccount, wishes = []) {
+    super(firstname, bankAccount);
     this.wishes = wishes;
   }
 
@@ -94,6 +84,13 @@ export class Child extends Role {
   }
   get wishes() {
     return this._wishes;
+  }
+  addWish(wish) {
+    if (wish instanceof Wish) {
+      this._wishes.push(wish);
+    } else {
+      throw 'Type error!';
+    }
   }
 }
 export class Parent extends Role {}

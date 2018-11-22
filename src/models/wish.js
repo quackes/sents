@@ -1,15 +1,25 @@
-import { Child } from "./role";
-import { Uuid } from "./uuid";
+import { Child } from './role';
+import { Uuid } from './uuid';
+
+const CACHE = {};
 
 export class Wish extends Uuid {
   _open = true;
   _title = 'Wunsch';
   _amount = 0;
 
-  constructor( title, amount) {
+  constructor(title, amount) {
     super();
     this.title = title;
     this.amount = amount;
+  }
+
+  static create(properties) {
+    if (!(CACHE[properties.uuid] instanceof Wish)) {
+      CACHE[properties.uuid] = new Wish(properties._title, properties._amount);
+    }
+    CACHE[properties.uuid].uuid = properties.uuid;
+    return CACHE[properties.uuid];
   }
 
   solved() {
@@ -41,5 +51,4 @@ export class Wish extends Uuid {
   get amount() {
     return this._amount;
   }
-
 }

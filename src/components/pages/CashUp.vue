@@ -1,7 +1,7 @@
 <template>
 <div>
   <v-toolbar app>
-      <v-toolbar-title>Verdienen 🚀</v-toolbar-title>
+    <v-toolbar-title>Verdienen 🚀</v-toolbar-title>
   </v-toolbar>
   <v-container>
     <v-list two-line>

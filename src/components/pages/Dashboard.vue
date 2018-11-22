@@ -1,7 +1,11 @@
 <template>
 <div>
   <v-toolbar app>
-      <v-toolbar-title>Übersicht 🏦</v-toolbar-title>
+    <v-toolbar-title>Übersicht 🏦</v-toolbar-title>
+    <v-spacer></v-spacer>
+    <v-toolbar-title style="font-weight: normal">
+      <small>{{user.firstname}}</small>
+    </v-toolbar-title>
   </v-toolbar>
   <v-container grid-list-md text-xs-center>
     <v-layout row>
