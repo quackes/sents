@@ -21,8 +21,8 @@
 
 
                         <v-list-tile-action>
-                            <v-btn v-on:click="close(item)" color="accent" fab dark small>
-                                <v-icon>add</v-icon>
+                            <v-btn v-on:click="close(item)" color="primary" fab dark small>
+                                <v-icon>check</v-icon>
                             </v-btn>
                         </v-list-tile-action>
                 <v-list-tile-action>
@@ -77,7 +77,7 @@
 </div>
 </template>
 <script>
-import { getClosedTasks, getOpenTasks } from '../../services/helper.service';
+import { getClosedTasks, getOpenTasks } from "../../services/helper.service";
 export default {
   name: "Earn",
   data: function() {
@@ -95,8 +95,8 @@ export default {
         this.completions = data.completions;
         this.tasks = data.tasks;
         this.user = data.users[0];
-        this.openTasks = getOpenTasks( data.tasks);
-        this.closedTasks = getClosedTasks( data.tasks);
+        this.openTasks = getOpenTasks(data.tasks);
+        this.closedTasks = getClosedTasks(data.tasks);
       })
       .catch(error => {
         console.warn(error);
@@ -108,9 +108,9 @@ export default {
         if (index >= 0) {
             this.tasks[index].done();
             this.tasks[index].client = this.user;
-        this.openTasks = getOpenTasks( this.tasks);
-        this.closedTasks = getClosedTasks( this.tasks);
-        this.DataService.store();
+            this.openTasks = getOpenTasks( this.tasks);
+            this.closedTasks = getClosedTasks( this.tasks);
+            this.DataService.store();
         }
     }
   }
