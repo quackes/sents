@@ -101,7 +101,7 @@ export default {
         console.log(data);
         this.completions = data.completions;
         this.tasks = data.tasks;
-        this.user = data.users[0];
+        this.user = data.users[1];
         this.completion = new Completion(this.user);
       })
       .catch(error => {
@@ -128,13 +128,16 @@ export default {
         let transactions = this.completion.transactions;
         let transferPromises = [];
         Object.keys(transactions).forEach(key => {
-          transferPromises.push(window.ahoi.transfer(transactions[key]));
+            let t = transactions[key];
+            t.tasks.forEach(t => t.paid())
+          transferPromises.push(window.ahoi.transfer(t));
         });
         Promise.all(transferPromises).then(resolve, reject);
       })
         .then(() => {
           this.completion = new Completion(USERS[1]);
           this.loading = false;
+          this.DataService.store();
         })
         .catch(() => (this.loading = false));
     },
