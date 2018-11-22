@@ -7,7 +7,7 @@
     <v-layout row text-xs-center v-if="wishes.length > 0">
       <v-flex xs12>
         <h2 class="dramatic">{{wishes[0].title}}</h2>
-          <v-progress-circular color="accent" :value="40">
+          <v-progress-circular color="accent" :value="percentProgress">
             <img id="wish-image" :src="playstation" />
           </v-progress-circular>
           <h1 class="dramatic-red huge-text">{{wishes[0].amount | currency}}</h1>
@@ -20,11 +20,11 @@
       </v-flex>
       <v-flex xs4>
         <h3>Übrig</h3>
-        <h1 class="dramatic-red">{{wishes[0].amount - wishAmount|currency}}</h1>
+        <h1 class="dramatic-red">{{restAmount|currency}}</h1>
       </v-flex>
       <v-flex xs4>
         <h3>Tage zum Ziel</h3>
-        <h1 class="dramatic-red">{{Math.round((wishes[0].amount - wishAmount)/750)}}</h1>
+        <h1 class="dramatic-red">{{Math.round(restAmount/750)}}</h1>
       </v-flex>
     </v-layout>
     <v-spacer></v-spacer>
@@ -93,7 +93,10 @@ export default {
       return getWishAmount(this.completions, this.user);
     },
     restAmount: function() {
-      return this.tasks[0] - getWishAmount(this.completions, this.user);
+      return this.wishes[0].amount - getWishAmount(this.completions, this.user);
+    },
+    percentProgress: function() {
+      return getWishAmount(this.completions, this.user) / this.wishes[0].amount * 100;
     }
   }
 };

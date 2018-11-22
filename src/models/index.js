@@ -24,7 +24,7 @@ SOHN.ratio = 25;
 const MUTTER = new Parent("Mama Sabrina", BANK_ACCOUNT_PARENT);
 const VATER = new Parent("Papa David", BANK_ACCOUNT_PARENT);
 
-export const USERS = [SOHN, MUTTER, VATER];
+export const USERS = [SOHN, MUTTER];
 
 function doneTask(task) {
   if (task instanceof Task) {
@@ -60,7 +60,7 @@ export const TASKS = [
     MUTTER,
     require("../assets/icon-clean.png")
   ),
-  new Task("Rasen mähen", 2000, VATER, require("../assets/icon-lawn.png")),
+  new Task("Rasen mähen", 2000, MUTTER, require("../assets/icon-lawn.png")),
   new Task(
     "Wäsche sortieren",
     700,
