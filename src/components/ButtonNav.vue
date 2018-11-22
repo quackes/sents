@@ -45,15 +45,6 @@
         <span>Einstellungen</span>
         <v-icon>settings</v-icon>
       </v-btn>
-      <v-btn
-        color="primary"
-        flat
-        value="cash-up"
-        to="/cash-up"
-      >
-        <span>Abrechnen</span>
-        <v-icon>place</v-icon>
-      </v-btn>
     </v-bottom-nav>
   </v-card>
 </template>
@@ -68,7 +59,7 @@ export default {
   },
   mounted: function() {
     window.router.afterEach((to, from) => {
-      if (to.path === "/" || to.path === "/login") {
+      if (to.path === "/" || to.path === "/login" || to.path === "/cash-up") {
         this.hide = true;
       } else {
         this.hide = false;
