@@ -123,9 +123,9 @@ class AhoiService {
 
     }
 
-    loadSaldo(iban){
-        return new Promise((resolve, reject) => {
+    getAccount(iban) {
 
+        return new Promise((resolve, reject) => {
             new AhoiClient.AccountApi()
                 .getAccounts(this.bankingAccess.id, (error, data) => {
                     if (error) {
@@ -143,9 +143,27 @@ class AhoiService {
                         reject('No bank account found for iban ' + iban)
                     }
                 })
-        }).then(account => {
-            return account.balance.amount.value
-        })
+        });
+    }
+
+    loadSaldo(iban) {
+        return this.getAccount(iban)
+            .then((account) => {
+                return new Promise((resolve, reject) => {
+                    new AhoiClient.TransactionApi()
+                        .listTransactions(this.bankingAccess.id, account.id, {limit: 1, maxAge: 0}, (error, data) => {
+                            if (error) {
+                                reject(error)
+                                return;
+                            }
+                            resolve()
+                        })
+                });
+            })
+            .then(() => this.getAccount(iban))
+            .then(account => {
+                return account.balance.amount.value
+            })
     }
 
     saldo(iban) {
@@ -172,8 +190,8 @@ class AhoiService {
             return Promise.reject('No parent or child account set')
         }
 
-        let amount = transaction.freeAmount();
-        let purpose = transaction.purpose();
+        let amount = transaction.freeAmount;
+        let purpose = transaction.purpose;
 
         let transfer = {
                 "iban": transaction.child.bankAccount.iban,

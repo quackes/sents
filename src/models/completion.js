@@ -9,7 +9,6 @@ export class Completion extends ParentTaskList {
         transactions[task.child] = new Transaction(this.parent, task.child);
       }
       transactions[task.child].addTask(task);
-      transactions[task.child].paid();
     });
     return transactions;
   }
