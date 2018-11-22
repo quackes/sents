@@ -40,7 +40,7 @@ export class ParentTaskList extends Uuid {
     }
   }
   addTask(task) {
-    if (task instanceof Task && task.parent === this.parent && task.isDone()) {
+    if (task.parent.uuid === this.parent.uuid && task.isDone()) {
       this._tasks.push(task);
     }
   }
