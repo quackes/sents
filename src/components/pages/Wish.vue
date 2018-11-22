@@ -43,7 +43,7 @@
                 <v-list-tile-title v-text="item.title"></v-list-tile-title>
               </v-list-tile-content>
               <div>
-                <!-- <div class="dramatic-blue">{{item.amount|currency}}</div> -->
+                <div class="dramatic-blue">{{item.amount|currency}}</div>
               </div>
             </v-list-tile>
             <v-divider v-if="index + 1 < wishes.length" :key="`divider-${index}`"></v-divider>
