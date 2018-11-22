@@ -50,7 +50,7 @@ const router = new VueRouter({
 
 window.router = router;
 
-Promise.all([window.ahoi.init(), StorageService.put(DATA)])
+Promise.all([window.ahoi.init()])
   .then(responses => {
     new Vue({
       router,
