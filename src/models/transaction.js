@@ -39,13 +39,13 @@ export class Transaction extends ParentTaskList {
 
   get amount() {
     let amount = 0;
-    this.task.forEach(task => {
+    this.tasks.forEach(task => {
       amount += task.amount;
     });
     return amount;
   }
   get freeAmount() {
-    return Math.round(this.amount * this.ratio);
+    return Math.round(this.amount * (this.ratio / 100 ));
   }
 
   get wishAmount() {
@@ -54,7 +54,7 @@ export class Transaction extends ParentTaskList {
 
   get purpose() {
     let list = [];
-    this.task.forEach(task => {
+    this.tasks.forEach(task => {
       list.push(task.title);
     });
     return list.join(', ');
