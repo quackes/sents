@@ -47,4 +47,29 @@ export default {
   padding-left: 8px;
   padding-right: 8px;
 }
+
+body {
+  font-family: "Nunito", sans-serif;
+}
+
+.application {
+  font-family: "Nunito", sans-serif;
+  font-weight: 700;
+}
+
+.v-toolbar__title {
+  font-weight: 900;
+}
+
+.v-btn__content {
+  font-weight: 900;
+}
+
+.dramatic {
+  font-weight: 900;
+}
+.dramatic-red {
+  font-weight: 900;
+  color: #ea3468;
+}
 </style>
