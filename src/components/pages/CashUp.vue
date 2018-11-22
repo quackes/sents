@@ -1,7 +1,7 @@
 <template>
     <div>
         <v-toolbar app>
-            <v-toolbar-title>Aufgaben betätigen 🚀</v-toolbar-title>
+            <v-toolbar-title>Aufgaben betätigen 💸</v-toolbar-title>
         </v-toolbar>
         <v-container>
             <v-list two-line>
@@ -79,54 +79,54 @@
     </div>
 </template>
 <script>
-import {getClosedTasks} from '../../services/helper.service';
-import { Completion } from '../../models/completion';
-import { USERS } from '../../models';
+import { getClosedTasks } from "../../services/helper.service";
+import { Completion } from "../../models/completion";
+import { USERS } from "../../models";
 
 export default {
   name: "CashUp",
-  data () {
+  data() {
     return {
       completion: new Completion(USERS[1]),
-        loading: false
-    }
+      loading: false
+    };
   },
   computed: {
-      closedTask: function () {
-          return getClosedTasks().filter((t) => this.completion.tasks.indexOf(t) < 0);
-      }
+    closedTask: function() {
+      return getClosedTasks().filter(t => this.completion.tasks.indexOf(t) < 0);
+    }
   },
   methods: {
-      add: function (task) {
-        // this.completion.addTask(task);
-      },
-      addAll: function () {
-        getClosedTasks()
-            .forEach((t) => {
-                this.completion.addTask(t)
-            })
-      },
-      cashUp: function () {
-          this.loading = true
-          new Promise((resolve, reject) => {
-              let transactions = this.completion.transactions;
-              let transferPromises = []
-              Object.keys(transactions).forEach((key) => {
-                  transferPromises.push( window.ahoi.transfer(transactions[key]))
-              })
-              Promise.all(transferPromises).then(resolve, reject)
-          }).then(()=>{
-              this.completion = new Completion(USERS[1]);
-              this.loading = false;
-          }).catch(() => this.loading = false)
-      },
-      hasAccepted: function() {
-          return !!this.completion.tasks.length
-      },
-      acceptedSum : function (){
-          return this.completion.tasks.reduce((cur, next) => cur + next.amount , 0)
-      }
-
+    add: function(task) {
+      // this.completion.addTask(task);
+    },
+    addAll: function() {
+      getClosedTasks().forEach(t => {
+        this.completion.addTask(t);
+      });
+    },
+    cashUp: function() {
+      this.loading = true;
+      new Promise((resolve, reject) => {
+        let transactions = this.completion.transactions;
+        let transferPromises = [];
+        Object.keys(transactions).forEach(key => {
+          transferPromises.push(window.ahoi.transfer(transactions[key]));
+        });
+        Promise.all(transferPromises).then(resolve, reject);
+      })
+        .then(() => {
+          this.completion = new Completion(USERS[1]);
+          this.loading = false;
+        })
+        .catch(() => (this.loading = false));
+    },
+    hasAccepted: function() {
+      return !!this.completion.tasks.length;
+    },
+    acceptedSum: function() {
+      return this.completion.tasks.reduce((cur, next) => cur + next.amount, 0);
+    }
   }
 };
 </script>

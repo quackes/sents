@@ -20,7 +20,7 @@
                 </v-list-tile-content>
 
                 <v-list-tile-action>
-                    <h3>{{ item.amount }}</h3>
+                    <h3 class="dramatic-blue">{{ item.amount }}</h3>
                 </v-list-tile-action>
             </v-list-tile>
             <v-divider v-if="index + 1 < open.length" :key="`divider-${index}`"></v-divider>
@@ -58,13 +58,14 @@
                 </v-list-tile-content>
 
                 <v-list-tile-action>
-                    <h3>{{ item.amount }}</h3>
+                    <h3 class="dramatic-blue">{{ item.amount }}</h3>
                 </v-list-tile-action>
             </v-list-tile>
             <v-divider v-if="index + 1 < pending.length" :key="`divider-${index}`"></v-divider>
         </template>
     </v-list>
   </v-container>
+    <v-spacer />
 </div>
 </template>
 <script>
