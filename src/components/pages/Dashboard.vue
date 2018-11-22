@@ -25,6 +25,7 @@
               </v-flex>
               <v-flex xs2>
                 <v-icon color="secondary">arrow_right_alt</v-icon>
+                <!-- &#8793; -->
               </v-flex>
               <v-flex xs5>
                 <h1 class="dramatic-yellow huge-text">{{openAmount|currency}}</h1>
@@ -78,7 +79,7 @@
               <v-flex xs4>
                 <h3>Freizeit</h3>
                 <h3 class="dramatic-yellow">{{accountAmount|currency}}</h3>
-                <h3 class="dramatic-yellow">{{freeAmount|currency}}</h3>
+                <!-- <h3 class="dramatic-yellow">{{freeAmount|currency}}</h3> -->
               </v-flex>
               <v-flex xs4>
                 <h3>Gesamt</h3>

@@ -53,7 +53,7 @@
     </v-layout>
     <v-layout row justify-center>
       <v-flex xs12 text-xs-center>
-        <v-btn flat small color="primary">Neuer Wunsch</v-btn>
+        <v-btn color="primary">Neuer Wunsch</v-btn>
       </v-flex>
     </v-layout>
   </v-container>

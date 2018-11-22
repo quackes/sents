@@ -87,6 +87,9 @@ export default {
   name: "CashUp",
   data() {
     return {
+      completions: [],
+      user: {},
+      tasks: [],
       completion: new Completion(USERS[1]),
       loading: false
     };
@@ -106,7 +109,7 @@ export default {
   },
   computed: {
     closedTask: function() {
-      return getClosedTasks().filter(t => this.completion.tasks.indexOf(t) < 0);
+      return getClosedTasks(this.tasks).filter(t => this.completion.tasks.indexOf(t) < 0);
     }
   },
   methods: {
@@ -114,7 +117,7 @@ export default {
       // this.completion.addTask(task);
     },
     addAll: function() {
-      getClosedTasks().forEach(t => {
+      getClosedTasks(this.tasks).forEach(t => {
         this.completion.addTask(t);
       });
     },

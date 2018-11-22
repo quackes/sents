@@ -19,6 +19,14 @@ export class Transaction extends ParentTaskList {
     };
   }
 
+  set ratio(ratio) {
+    if (typeof ratio === 'number') {
+      this._ratio = ratio;
+    } else {
+      throw 'Type error!';
+    }
+  }
+
   get ratio() {
     return this._ratio;
   }
@@ -63,7 +71,7 @@ export class Transaction extends ParentTaskList {
   set child(child) {
     if (child instanceof Child) {
       this._child = child;
-      this._ratio = JSON.parse(JSON.stringify(child.ratio));
+      this.ratio = child.ratio;
     } else {
       throw 'Type error!';
     }

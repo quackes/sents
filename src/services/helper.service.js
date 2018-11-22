@@ -35,9 +35,9 @@ export function getFreeAmount(completions, child) {
       if (completion instanceof Completion) {
         let transactions = completion.transactions;
         for(let property in transactions) {
-          if (transactions.hasOwnProperty(property) && transactions[property].isPaid()) {
+          if (transactions.hasOwnProperty(property)) { // && transactions[property].isPaid()
             transactions[property].tasks.forEach(task => {
-              if (task instanceof Task && task.child === child && task.isDone()) {
+              if (task instanceof Task && task.child === child && task.isDone() && task.isPaid()) {
                 amount += task.amount * transactions[property].ratio / 100;
               }
             });
@@ -56,7 +56,7 @@ export function getWishAmount(completions, child) {
       if (completion instanceof Completion) {
         let transactions = completion.transactions;
         for(let property in transactions) {
-          if (transactions.hasOwnProperty(property)) {
+          if (transactions.hasOwnProperty(property)) { // && transactions[property].isPaid()
             transactions[property].tasks.forEach(task => {
               if (task instanceof Task && task.child === child && task.isDone() && task.isPaid()) {
                 amount += task.amount * (100 - transactions[property].ratio) / 100;
