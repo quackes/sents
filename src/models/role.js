@@ -53,7 +53,7 @@ export class Role extends Uuid {
   }
 }
 export class Child extends Role {
-  _ratio = 50;
+  _ratio = 25;
   _wishes = [];
 
   constructor(firstname, bankAccount, wishes = []) {

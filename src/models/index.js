@@ -16,7 +16,7 @@ const BANK_ACCOUNT_CHILD = new BankAccount("DE00999940000000001135", BANK_BIC);
 const BANK_ACCOUNT_PARENT = new BankAccount("DE00999940000000001128", BANK_BIC);
 
 const SOHN = new Child("Carli", BANK_ACCOUNT_CHILD, [
-  new Wish("Playstation 4", 50000),
+  new Wish("Playstation 4", 17500),
   new Wish("Fahrrad", 45500),
   new Wish("Snowboard", 21500)
 ]);
@@ -43,7 +43,21 @@ function doneTasks(tasks) {
 
 export const DONE_TASKS = [
   new Task("Gassi gehen", 300, MUTTER, require("../assets/icon-dog.png")),
-  new Task("Zimmer aufräumen", 200, MUTTER, require("../assets/icon-clean.png"))
+  new Task("Zimmer aufräumen", 500, MUTTER, require("../assets/icon-clean.png")),
+  new Task("Gassi gehen", 300, MUTTER, require("../assets/icon-dog.png")),
+  new Task("Zimmer aufräumen", 500, MUTTER, require("../assets/icon-clean.png")),
+  new Task("Gassi gehen", 300, MUTTER, require("../assets/icon-dog.png")),
+  new Task("Zimmer aufräumen", 500, MUTTER, require("../assets/icon-clean.png")),
+  new Task("Gassi gehen", 300, MUTTER, require("../assets/icon-dog.png")),
+  new Task("Zimmer aufräumen", 500, MUTTER, require("../assets/icon-clean.png")),
+  new Task("Gassi gehen", 300, MUTTER, require("../assets/icon-dog.png")),
+  new Task("Zimmer aufräumen", 500, MUTTER, require("../assets/icon-clean.png")),
+  new Task("Gassi gehen", 300, MUTTER, require("../assets/icon-dog.png")),
+  new Task("Zimmer aufräumen", 500, MUTTER, require("../assets/icon-clean.png")),
+  new Task("Gassi gehen", 300, MUTTER, require("../assets/icon-dog.png")),
+  new Task("Zimmer aufräumen", 500, MUTTER, require("../assets/icon-clean.png")),
+  new Task("Gassi gehen", 300, MUTTER, require("../assets/icon-dog.png")),
+  new Task("Zimmer aufräumen", 500, MUTTER, require("../assets/icon-clean.png"))
 ];
 doneTasks(DONE_TASKS);
 
@@ -79,4 +93,4 @@ export const DATA = {
   tasks: TASKS
 };
 
-console.log(JSON.stringify(DATA));
+// console.log(JSON.stringify(DATA));
