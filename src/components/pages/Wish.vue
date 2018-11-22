@@ -7,8 +7,10 @@
     <v-layout row text-xs-center>
       <v-flex xs12>
         <h2 class="dramatic">Playstation 4</h2>
-          <v-progress-circular color="accent" :value="40"></v-progress-circular>
-          <h1 class="dramatic-red">500</h1>
+          <v-progress-circular color="accent" :value="40">
+            <img id="wish-image" :src="playstation" />
+          </v-progress-circular>
+          <h1 class="dramatic-red huge-text">500 €</h1>
       </v-flex>
     </v-layout>
     <v-layout row text-xs-center align-center>
@@ -66,7 +68,8 @@ export default {
       items: [
         { title: "Neues Fahrrad", info: "450 € übrig" },
         { title: "Snowboard", info: "320 € übrig" }
-      ]
+      ],
+      playstation: require("../../assets/playstation.jpg")
     };
   }
 };
@@ -76,6 +79,11 @@ export default {
 .v-progress-circular {
   height: 20vh !important;
   width: 20vh !important;
+}
+
+#wish-image {
+  border-radius: 100px;
+  height: 10vh;
 }
 </style>
 
