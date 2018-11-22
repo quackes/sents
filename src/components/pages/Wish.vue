@@ -8,7 +8,9 @@
       <v-flex xs12>
         <h2 class="dramatic">{{wishes[0].title}}</h2>
           <v-progress-circular color="accent" :value="percentProgress">
-            <img id="wish-image" :src="playstation" />
+            <router-link to="/wish-complete">
+              <img id="wish-image" :src="playstation" />
+            </router-link>
           </v-progress-circular>
           <h1 class="dramatic-red huge-text">{{wishes[0].amount | currency}}</h1>
       </v-flex>
@@ -61,7 +63,7 @@
   </div>
 </template>
 <script>
-import { getWishAmount } from '../../services/helper.service';
+import { getWishAmount } from "../../services/helper.service";
 export default {
   name: "Wish",
   data: function() {
@@ -73,18 +75,18 @@ export default {
     };
   },
   dependencies: ["DataService"],
-  mounted: function () {
+  mounted: function() {
     this.DataService.restore()
-      .then((data) => {
+      .then(data => {
         console.log(data);
         this.completions = data.completions;
         this.tasks = data.tasks;
         this.user = data.users[0];
         this.wishes = this.user.wishes;
-        this.openTasks = getOpenTasks( data.tasks);
-        this.closedTasks = getClosedTasks( data.tasks);
+        this.openTasks = getOpenTasks(data.tasks);
+        this.closedTasks = getClosedTasks(data.tasks);
       })
-      .catch((error) => {
+      .catch(error => {
         console.warn(error);
       });
   },
@@ -96,7 +98,10 @@ export default {
       return this.wishes[0].amount - getWishAmount(this.completions, this.user);
     },
     percentProgress: function() {
-      return getWishAmount(this.completions, this.user) / this.wishes[0].amount * 100;
+      return (
+        (getWishAmount(this.completions, this.user) / this.wishes[0].amount) *
+        100
+      );
     }
   }
 };
