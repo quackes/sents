@@ -1,12 +1,12 @@
 import { Child, Task, TASKS } from '../models';
 import { Completion } from '../models/completion';
 
-export function getClosedTasks() {
-  return TASKS.filter((t)=>t.isDone())
+export function getClosedTasks(tasks) {
+  return tasks.filter((t)=>t.isDone())
 }
-export function numberOfOpenTasks() {
+export function numberOfOpenTasks(tasks) {
   let counter = 0;
-  TASKS.forEach((task) => {
+  tasks.forEach((task) => {
     if (task instanceof Task && task.child === null) {
       counter +=1;
     }
@@ -14,9 +14,9 @@ export function numberOfOpenTasks() {
   return counter;
 }
 
-export function getOpenAmount() {
+export function getOpenAmount(tasks) {
   let amount = 0;
-  TASKS.forEach((task) => {
+  tasks.forEach((task) => {
     if (task instanceof Task && task.child === null) {
       amount += task.amount;
     }
@@ -52,9 +52,9 @@ export function getWishAmount(completions, child) {
       if (completion instanceof Completion) {
         let transactions = completion.transactions;
         for(let property in transactions) {
-          if (transactions.hasOwnProperty(property) && transactions[property].isPaid()) {
+          if (transactions.hasOwnProperty(property)) {
             transactions[property].tasks.forEach(task => {
-              if (task instanceof Task && task.child === child && task.isDone()) {
+              if (task instanceof Task && task.child === child && task.isDone() && task.isPaid()) {
                 amount += task.amount * (100 - transactions[property].ratio) / 100;
               }
             });

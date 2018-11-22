@@ -26,6 +26,7 @@ function doneTask(task) {
   if (task instanceof Task) {
     task.child = SOHN;
     task.done();
+    task.paid();
   }
 }
 function doneTasks(tasks) {
@@ -36,10 +37,11 @@ function doneTasks(tasks) {
   }
 }
 
-export const DONE_TASKS = [new Task('Gassi gehen', 300, MUTTER), new Task('Einkaufen gehen', 1000, MUTTER)];
+export const DONE_TASKS = [new Task('Gassi gehen', 300, MUTTER), new Task('Müll rausbringen', 200, MUTTER), new Task('Einkaufen gehen', 1000, MUTTER)];
 doneTasks(DONE_TASKS);
 
 export const TASKS = [
+  new Task('Müll rausbringen', 200, MUTTER), 
   new Task('Garage aufräumen', 1500, MUTTER),
   new Task('Rasen mähen', 2000, VATER),
   new Task('Wäsche aufhängen', 300, MUTTER)
@@ -54,35 +56,3 @@ export const DATA = {
   users: USERS,
   tasks: TASKS
 };
-
-// let data = JSON.parse(JSON.stringify(DATA));
-// data.completions.forEach(completion => {
-//   console.log(Completion.create(completion));
-// });
-// data.tasks.forEach(task => {
-//   console.log(Task.create(task));
-// });
-// data.users.forEach(user => {
-//   console.log(Role.create(user));
-// });
-
-// StorageService.put(DATA).then(() => {
-//   StorageService.get().then(data => {
-//     DATA.completions = [];
-//     data.completions.forEach(completion => {
-//       DATA.completions.push(Completion.create(completion));
-//     });
-    
-//     DATA.tasks = [];
-//     data.tasks.forEach(task => {
-//       DATA.tasks.push(Task.create(task));
-//     });
-    
-//     DATA.users = [];
-//     data.users.forEach(user => {
-//       DATA.users.push(Role.create(user));
-//     });
-
-//     console.log(DATA);
-//   });
-// });

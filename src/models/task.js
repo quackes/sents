@@ -49,11 +49,11 @@ export class Task extends Uuid {
     this._done = false;
   }
 
-  get paid() {
+  isPaid() {
     return this._paid;
   }
 
-  setPaid() {
+  paid() {
     this._paid = true;
   }
 

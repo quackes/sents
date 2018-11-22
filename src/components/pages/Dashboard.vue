@@ -10,7 +10,7 @@
   <v-container>
     <v-layout row>
       <v-flex xs12>
-        <h3 class="dramatic">Hi Martin! 👋</h3>
+        <h3 class="dramatic">Hi {{user.firstname}}! 👋</h3>
         <p>
           Sents hilft dir dabei zu Lernen mit Geld umzugehen. Erledige Aufgaben, werde bezahlt, spare und erfülle dir deine Wünsche!
         </p>
@@ -82,14 +82,15 @@
               <v-flex xs4>
                 <h3>Freizeit</h3>
                 <h3 class="dramatic-yellow">{{accountAmount|currency}}</h3>
-              </v-flex>
-              <v-flex xs4>
-                <h3>Gespart</h3>
-                <h3 class="dramatic-yellow">{{wishAmount|currency}}</h3>
+                <h3 class="dramatic-yellow">{{freeAmount|currency}}</h3>
               </v-flex>
               <v-flex xs4>
                 <h3>Gesamt</h3>
                 <h3 class="dramatic-yellow">{{fullAmount|currency}}</h3>
+              </v-flex>
+              <v-flex xs4>
+                <h3>Wunsch</h3>
+                <h3 class="dramatic-yellow">{{wishAmount|currency}}</h3>
               </v-flex>
             </v-layout>
           </v-card-text>
@@ -139,10 +140,10 @@ export default {
   },
   computed: {
     numberOfOpenTasks: function() {
-      return numberOfOpenTasks();
+      return numberOfOpenTasks(this.tasks);
     },
     openAmount: function() {
-      return getOpenAmount(this.completions, this.user);
+      return getOpenAmount(this.tasks);
     },
     fullAmount: function() {
       return getFullAmount(this.completions, this.user);

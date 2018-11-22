@@ -58,6 +58,17 @@ export default {
     };
   },
   mounted: function() {
+    let path = window.router.currentRoute.path;
+    if (
+        path === "/" ||
+        path === "/login" ||
+        path === "/cash-up" ||
+        path === "/celebrate"
+      ) {
+        this.hide = true;
+      } else {
+        this.hide = false;
+      }
     window.router.afterEach((to, from) => {
       if (
         to.path === "/" ||
