@@ -1,5 +1,7 @@
-import { Child, Parent } from './role';
+import { Child, Parent, Role } from './role';
 import { Uuid } from './uuid';
+
+const CACHE = {};
 
 export class Task extends Uuid {
   _done = false;
@@ -15,6 +17,20 @@ export class Task extends Uuid {
     this.title = title;
     this.amount = amount;
     this.parent = parent;
+  }
+
+  static create(properties) {
+    if (!(CACHE[properties.uuid] instanceof Task)) {
+      CACHE[properties.uuid] = new Task(properties._title, properties._amount, Role.create(properties._parent));
+      CACHE[properties.uuid]._done = properties._done;
+      CACHE[properties.uuid]._paid = properties._paid;
+      if (properties._child !== null) {
+        CACHE[properties.uuid]._child = Role.create(properties._child);
+      }
+      CACHE[properties.uuid]._icon = properties._icon;
+    }
+    CACHE[properties.uuid].uuid = properties.uuid;
+    return CACHE[properties.uuid];
   }
 
   get icon() {

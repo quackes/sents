@@ -1,14 +1,15 @@
 // @flow
-import "@babel/polyfill";
-import Vue from "vue";
-import "./plugins/vuetify";
-import injector from "vue-inject";
-import VueRouter from "vue-router";
-import "./pipes/currency";
-import "./pipes/percent";
-import "./services/ahoi/ahoi-service";
-import { DATA } from "./models";
-import VueRx from "vue-rx";
+import '@babel/polyfill';
+import { DATA } from './models';
+import Vue from 'vue';
+import './plugins/vuetify';
+import injector from 'vue-inject';
+import VueRouter from 'vue-router';
+import './pipes/currency';
+import './pipes/percent';
+import './services/ahoi/ahoi-service';
+import './services/data.service';
+import VueRx from 'vue-rx';
 
 import App from "./App.vue";
 import Welcome from "./components/pages/Welcome.vue";
@@ -27,8 +28,8 @@ Vue.use(VueRx);
 Vue.use(injector);
 Vue.use(VueRouter);
 
-Vue.use(require("vue-currency-filter"));
-Vue.use(require("vue-moment"));
+Vue.use(require('vue-currency-filter'));
+Vue.use(require('vue-moment'));
 
 const router = new VueRouter({
   base: __dirname,
@@ -47,12 +48,13 @@ const router = new VueRouter({
 
 window.router = router;
 
-window.ahoi
-  .init()
-  .then(() => {
+Promise.all([window.ahoi.init(), StorageService.put(DATA)])
+  .then((responses) => {
     new Vue({
       router,
       render: h => h(App)
-    }).$mount("#app");
+    }).$mount('#app');
   })
-  .catch(() => {});
+  .catch(() => {
+    console.warn('Application does not run.');
+  });
