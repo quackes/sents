@@ -20,7 +20,7 @@
                         </v-list-tile-content>
 
                         <v-list-tile-action>
-                            <v-btn color="warning" fab dark small>
+                            <v-btn color="accent" fab dark small>
                                 <v-icon>add</v-icon>
                             </v-btn>
                         </v-list-tile-action>
@@ -92,15 +92,15 @@ export default {
     };
   },
   dependencies: ["ahoiService", "DataService"],
-  mounted: function () {
+  mounted: function() {
     this.DataService.restore()
-      .then((data) => {
+      .then(data => {
         console.log(data);
         this.completions = data.completions;
         this.tasks = data.tasks;
         this.user = data.users[0];
       })
-      .catch((error) => {
+      .catch(error => {
         console.warn(error);
       });
   },

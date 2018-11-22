@@ -26,20 +26,22 @@
             <v-divider v-if="index + 1 < open.length" :key="`divider-${index}`"></v-divider>
         </template>
     </v-list>
-    <v-layout row justify-center>
+    <!--<v-layout row justify-center>
         <v-flex xs12 text-xs-center>
             <v-btn flat small color="primary">erledigte Anzeigen</v-btn>
         </v-flex>
-    </v-layout>
+    </v-layout> -->
      <v-layout row justify-center>
         <v-flex xs12 text-xs-center>
+          <router-link to="/new-task">
             <v-btn color="primary">Neue Aufgabe</v-btn>
+          </router-link>
         </v-flex>
     </v-layout>
     <v-spacer></v-spacer>
      <v-layout row>
         <v-flex xs12>
-            <h2>Warten auf Bestätigung</h2>
+            <h2>Erledigte Aufgaben</h2>
         </v-flex>
     </v-layout>
     <v-list two-line>
@@ -128,15 +130,15 @@ export default {
     };
   },
   dependencies: ["DataService"],
-  mounted: function () {
+  mounted: function() {
     this.DataService.restore()
-      .then((data) => {
+      .then(data => {
         console.log(data);
         this.completions = data.completions;
         this.tasks = data.tasks;
         this.user = data.users[0];
       })
-      .catch((error) => {
+      .catch(error => {
         console.warn(error);
       });
   }

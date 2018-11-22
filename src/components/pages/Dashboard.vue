@@ -2,15 +2,11 @@
 <div>
   <v-toolbar app>
     <v-toolbar-title>Übersicht 🏦</v-toolbar-title>
-    <v-spacer></v-spacer>
-    <v-toolbar-title style="font-weight: normal">
-      <small>{{user.firstname}}</small>
-    </v-toolbar-title>
   </v-toolbar>
   <v-container>
     <v-layout row>
       <v-flex xs12>
-        <h3 class="dramatic">Hi Martin! 👋</h3>
+        <h3 class="dramatic">Hi {{user.firstname}}! 👋</h3>
         <p>
           Sents hilft dir dabei zu Lernen mit Geld umzugehen. Erledige Aufgaben, werde bezahlt, spare und erfülle dir deine Wünsche!
         </p>
@@ -125,15 +121,15 @@ export default {
     };
   },
   dependencies: ["ahoiService", "DataService"],
-  mounted: function () {
+  mounted: function() {
     this.DataService.restore()
-      .then((data) => {
+      .then(data => {
         console.log(data);
         this.completions = data.completions;
         this.tasks = data.tasks;
         this.user = data.users[0];
       })
-      .catch((error) => {
+      .catch(error => {
         console.warn(error);
       });
   },
