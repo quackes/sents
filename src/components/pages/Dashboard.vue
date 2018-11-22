@@ -86,8 +86,10 @@
                 <h3 class="dramatic-yellow">{{fullAmount|currency}}</h3>
               </v-flex>
               <v-flex xs4>
-                <h3>Wunsch</h3>
-                <h3 class="dramatic-yellow">{{wishAmount|currency}}</h3>
+                  <h3>Wunsch</h3>
+                  <router-link to="/wish-complete">
+                    <h3 class="dramatic-yellow">{{wishAmount|currency}}</h3>
+                  </router-link>
               </v-flex>
             </v-layout>
           </v-card-text>
