@@ -102,6 +102,7 @@ export default {
         this.completions = data.completions;
         this.tasks = data.tasks;
         this.user = data.users[0];
+        this.completion = new Completion(this.user);
       })
       .catch(error => {
         console.warn(error);
