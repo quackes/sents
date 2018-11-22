@@ -21,7 +21,9 @@
               <h2 class="dramatic text-left">Offene Aufgaben 💪</h2>
             <v-layout row align-center>
               <v-flex xs5>
-                <h1 id="open-tasks" class="dramatic-yellow huge-text">{{numberOfOpenTasks}}</h1>
+                <router-link to="/earn">
+                  <h1 id="open-tasks" class="dramatic-yellow huge-text">{{numberOfOpenTasks}}</h1>
+                </router-link>
               </v-flex>
               <v-flex xs2>
                 <v-icon color="secondary">arrow_right_alt</v-icon>
@@ -87,7 +89,7 @@
               </v-flex>
               <v-flex xs4>
                   <h3>Wunsch</h3>
-                  <router-link to="/wish-complete">
+                  <router-link to="/wish">
                     <h3 class="dramatic-yellow">{{wishAmount|currency}}</h3>
                   </router-link>
               </v-flex>
