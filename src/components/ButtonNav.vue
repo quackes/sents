@@ -74,7 +74,8 @@ export default {
         to.path === "/" ||
         to.path === "/login" ||
         to.path === "/cash-up" ||
-        to.path === "/celebrate"
+        to.path === "/celebrate" ||
+        to.path === "/new-task"
       ) {
         this.hide = true;
       } else {
