@@ -48,20 +48,40 @@ let completion = new Completion(MUTTER, DONE_TASKS);
 
 export const COMPLETIONS = [completion];
 
-export const DATA = {
+export let DATA = {
   completions: COMPLETIONS,
   users: USERS,
   tasks: TASKS
 };
 
-
-let data = JSON.parse(JSON.stringify(DATA));
-data.users.forEach((user) => {
-  console.log(Role.create(user));
-});
+// let data = JSON.parse(JSON.stringify(DATA));
+// data.completions.forEach(completion => {
+//   console.log(Completion.create(completion));
+// });
+// data.tasks.forEach(task => {
+//   console.log(Task.create(task));
+// });
+// data.users.forEach(user => {
+//   console.log(Role.create(user));
+// });
 
 StorageService.put(DATA).then(() => {
   StorageService.get().then(data => {
-    console.log(data);
+    DATA.completions = [];
+    data.completions.forEach(completion => {
+      DATA.completions.push(Completion.create(completion));
+    });
+    
+    DATA.tasks = [];
+    data.tasks.forEach(task => {
+      DATA.tasks.push(Task.create(task));
+    });
+    
+    DATA.users = [];
+    data.users.forEach(user => {
+      DATA.users.push(Role.create(user));
+    });
+
+    console.log(DATA);
   });
 });
