@@ -79,7 +79,7 @@
     </div>
 </template>
 <script>
-import { getClosedTasks } from "../../services/helper.service";
+import { getClosedTasks , getTasksToAccept} from "../../services/helper.service";
 import { Completion } from "../../models/completion";
 import { USERS } from "../../models";
 
@@ -110,7 +110,7 @@ export default {
   },
   computed: {
     closedTask: function() {
-      return getClosedTasks(this.tasks).filter(t => this.completion.tasks.indexOf(t) < 0);
+      return getTasksToAccept(this.tasks).filter(t => this.completion.tasks.indexOf(t) < 0);
     }
   },
   methods: {
@@ -118,7 +118,7 @@ export default {
       // this.completion.addTask(task);
     },
     addAll: function() {
-      getClosedTasks(this.tasks).forEach(t => {
+        getTasksToAccept(this.tasks).forEach(t => {
         this.completion.addTask(t);
       });
     },
