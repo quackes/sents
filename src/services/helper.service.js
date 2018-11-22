@@ -11,7 +11,7 @@ export function getOpenTasks(tasks) {
 export function numberOfOpenTasks(tasks) {
   let counter = 0;
   tasks.forEach((task) => {
-    if (task instanceof Task && task.child === null) {
+    if (task instanceof Task && task.isDone() === false) {
       counter +=1;
     }
   });
@@ -21,7 +21,7 @@ export function numberOfOpenTasks(tasks) {
 export function getOpenAmount(tasks) {
   let amount = 0;
   tasks.forEach((task) => {
-    if (task instanceof Task && task.child === null) {
+    if (task instanceof Task && task.isDone() === false) {
       amount += task.amount;
     }
   });

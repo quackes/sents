@@ -82,6 +82,7 @@ export default {
   name: "Earn",
   data: function() {
     return {
+        user: {},
       openTasks: [],
       closedTasks: []
     };
@@ -106,6 +107,7 @@ export default {
         let index = this.tasks.indexOf(task);
         if (index >= 0) {
             this.tasks[index].done();
+            this.tasks[index].client = this.user;
         this.openTasks = getOpenTasks( this.tasks);
         this.closedTasks = getClosedTasks( this.tasks);
         this.DataService.store();
