@@ -4,7 +4,7 @@
       <v-toolbar-title>Wunsch 🎁</v-toolbar-title>
   </v-toolbar>
   <v-container >
-    <v-layout row text-xs-center>
+    <v-layout row text-xs-center v-if="wishes.length > 0">
       <v-flex xs12>
         <h2 class="dramatic">{{wishes[0].title}}</h2>
           <v-progress-circular color="accent" :value="40">
@@ -13,7 +13,7 @@
           <h1 class="dramatic-red huge-text">{{wishes[0].amount | currency}}</h1>
       </v-flex>
     </v-layout>
-    <v-layout row text-xs-center align-center>
+    <v-layout row text-xs-center align-center v-if="wishes.length > 0">
       <v-flex xs4>
         <h3>Gespart</h3>
         <h1 class="dramatic-red">{{wishAmount|currency}}</h1>
@@ -43,7 +43,7 @@
                 <v-list-tile-title v-text="item.title"></v-list-tile-title>
               </v-list-tile-content>
               <div>
-                <div class="dramatic-blue">{{item.amount|currency}}</div>
+                <!-- <div class="dramatic-blue">{{item.amount|currency}}</div> -->
               </div>
             </v-list-tile>
             <v-divider v-if="index + 1 < wishes.length" :key="`divider-${index}`"></v-divider>
@@ -69,10 +69,6 @@ export default {
       completions: [],
       user: {},
       wishes: [],
-      items: [
-        { title: "Neues Fahrrad", info: "450 € übrig" },
-        { title: "Snowboard", info: "320 € übrig" }
-      ],
       playstation: require("../../assets/playstation.jpg")
     };
   },
