@@ -102,14 +102,13 @@ export default {
       });
   },
   methods: {
-    close: function(task) {
-      let index = this.tasks.indexOf(task);
-      if (index >= 0) {
-        console.log(this.tasks[index]);
-        this.tasks[index].done();
-        this.openTasks = getOpenTasks(this.tasks);
-        this.closedTasks = getClosedTasks(this.tasks);
-        this.DataService.store();
+    close: function (task) {
+        let index = this.tasks.indexOf(task);
+        if (index >= 0) {
+            this.tasks[index].done();
+            this.openTasks = getOpenTasks( this.tasks);
+            this.closedTasks = getClosedTasks( this.tasks);
+            this.DataService.store();
       }
     }
   }

@@ -4,27 +4,27 @@
       <v-toolbar-title>Wunsch 🎁</v-toolbar-title>
   </v-toolbar>
   <v-container >
-    <v-layout row text-xs-center>
+    <v-layout row text-xs-center v-if="wishes.length > 0">
       <v-flex xs12>
-        <h2 class="dramatic">Playstation 4</h2>
+        <h2 class="dramatic">{{wishes[0].title}}</h2>
           <v-progress-circular color="accent" :value="40">
             <img id="wish-image" :src="playstation" />
           </v-progress-circular>
-          <h1 class="dramatic-red huge-text">500 €</h1>
+          <h1 class="dramatic-red huge-text">{{wishes[0].amount | currency}}</h1>
       </v-flex>
     </v-layout>
-    <v-layout row text-xs-center align-center>
+    <v-layout row text-xs-center align-center v-if="wishes.length > 0">
       <v-flex xs4>
         <h3>Gespart</h3>
-        <h1 class="dramatic-red">120 €</h1>
+        <h1 class="dramatic-red">{{wishAmount|currency}}</h1>
       </v-flex>
       <v-flex xs4>
         <h3>Übrig</h3>
-        <h1 class="dramatic-red">380 €</h1>
+        <h1 class="dramatic-red">{{wishes[0].amount - wishAmount|currency}}</h1>
       </v-flex>
       <v-flex xs4>
         <h3>Tage zum Ziel</h3>
-        <h1 class="dramatic-red">61</h1>
+        <h1 class="dramatic-red">{{Math.round((wishes[0].amount - wishAmount)/750)}}</h1>
       </v-flex>
     </v-layout>
     <v-spacer></v-spacer>
@@ -36,17 +36,17 @@
     <v-layout row>
       <v-flex xs12>
         <v-list>
-          <template v-for="(item, index) in items">
+          <template v-for="(item, index) in wishes">
             <v-list-tile :key="index" info>
 
               <v-list-tile-content>
                 <v-list-tile-title v-text="item.title"></v-list-tile-title>
               </v-list-tile-content>
               <div>
-                <div class="dramatic-blue" v-text="item.info"></div>
+                <!-- <div class="dramatic-blue">{{item.amount|currency}}</div> -->
               </div>
             </v-list-tile>
-            <v-divider v-if="index + 1 < items.length" :key="`divider-${index}`"></v-divider>
+            <v-divider v-if="index + 1 < wishes.length" :key="`divider-${index}`"></v-divider>
           </template>
         </v-list>
       </v-flex>
@@ -61,14 +61,14 @@
   </div>
 </template>
 <script>
+import { getWishAmount } from '../../services/helper.service';
 export default {
   name: "Wish",
   data: function() {
     return {
-      items: [
-        { title: "Neues Fahrrad", info: "450 € übrig" },
-        { title: "Snowboard", info: "320 € übrig" }
-      ],
+      completions: [],
+      user: {},
+      wishes: [],
       playstation: require("../../assets/playstation.jpg")
     };
   },
@@ -80,10 +80,21 @@ export default {
         this.completions = data.completions;
         this.tasks = data.tasks;
         this.user = data.users[0];
+        this.wishes = this.user.wishes;
+        this.openTasks = getOpenTasks( data.tasks);
+        this.closedTasks = getClosedTasks( data.tasks);
       })
       .catch((error) => {
         console.warn(error);
       });
+  },
+  computed: {
+    wishAmount: function() {
+      return getWishAmount(this.completions, this.user);
+    },
+    restAmount: function() {
+      return this.tasks[0] - getWishAmount(this.completions, this.user);
+    }
   }
 };
 </script>

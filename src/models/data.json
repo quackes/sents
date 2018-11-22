@@ -1,0 +1,191 @@
+{
+  "completions": [
+    {
+      "uuid": 0.9820808744496821,
+      "_parent": {
+        "uuid": 0.19656664134206725,
+        "_firstname": "Mama Sabrina",
+        "_bankAccount": { "uuid": 0.10154837233418235, "_iban": "DE00999940000000001128", "_bic": "TESTBICXXXX" }
+      },
+      "_tasks": [
+        {
+          "uuid": 0.4270778402467379,
+          "_done": true,
+          "_paid": true,
+          "_title": "Gassi gehen",
+          "_amount": 300,
+          "_parent": {
+            "uuid": 0.19656664134206725,
+            "_firstname": "Mama Sabrina",
+            "_bankAccount": { "uuid": 0.10154837233418235, "_iban": "DE00999940000000001128", "_bic": "TESTBICXXXX" }
+          },
+          "_child": {
+            "uuid": 0.7258618713955838,
+            "_firstname": "Carli",
+            "_bankAccount": { "uuid": 0.37738003342180715, "_iban": "DE00999940000000001135", "_bic": "TESTBICXXXX" },
+            "_ratio": 25,
+            "_wishes": [
+              { "uuid": 0.17470246820033375, "_open": true, "_title": "Playstation 4", "_amount": 50000 },
+              { "uuid": 0.49601825230551944, "_open": true, "_title": "Fahrrad", "_amount": 45500 },
+              { "uuid": 0.0416939610791498, "_open": true, "_title": "Snowboard", "_amount": 21500 }
+            ]
+          },
+          "_icon": "/img/icon-dog.53ee40b7.png"
+        },
+        {
+          "uuid": 0.13995003705047648,
+          "_done": true,
+          "_paid": true,
+          "_title": "Zimmer aufräumen",
+          "_amount": 200,
+          "_parent": {
+            "uuid": 0.19656664134206725,
+            "_firstname": "Mama Sabrina",
+            "_bankAccount": { "uuid": 0.10154837233418235, "_iban": "DE00999940000000001128", "_bic": "TESTBICXXXX" }
+          },
+          "_child": {
+            "uuid": 0.7258618713955838,
+            "_firstname": "Carli",
+            "_bankAccount": { "uuid": 0.37738003342180715, "_iban": "DE00999940000000001135", "_bic": "TESTBICXXXX" },
+            "_ratio": 25,
+            "_wishes": [
+              { "uuid": 0.17470246820033375, "_open": true, "_title": "Playstation 4", "_amount": 50000 },
+              { "uuid": 0.49601825230551944, "_open": true, "_title": "Fahrrad", "_amount": 45500 },
+              { "uuid": 0.0416939610791498, "_open": true, "_title": "Snowboard", "_amount": 21500 }
+            ]
+          },
+          "_icon": "/img/icon-clean.91e3f13a.png"
+        }
+      ]
+    }
+  ],
+  "users": [
+    {
+      "uuid": 0.7258618713955838,
+      "_firstname": "Carli",
+      "_bankAccount": { "uuid": 0.37738003342180715, "_iban": "DE00999940000000001135", "_bic": "TESTBICXXXX" },
+      "_ratio": 25,
+      "_wishes": [
+        { "uuid": 0.17470246820033375, "_open": true, "_title": "Playstation 4", "_amount": 50000 },
+        { "uuid": 0.49601825230551944, "_open": true, "_title": "Fahrrad", "_amount": 45500 },
+        { "uuid": 0.0416939610791498, "_open": true, "_title": "Snowboard", "_amount": 21500 }
+      ]
+    },
+    {
+      "uuid": 0.19656664134206725,
+      "_firstname": "Mama Sabrina",
+      "_bankAccount": { "uuid": 0.10154837233418235, "_iban": "DE00999940000000001128", "_bic": "TESTBICXXXX" }
+    },
+    {
+      "uuid": 0.28798232059134565,
+      "_firstname": "Papa David",
+      "_bankAccount": { "uuid": 0.10154837233418235, "_iban": "DE00999940000000001128", "_bic": "TESTBICXXXX" }
+    }
+  ],
+  "tasks": [
+    {
+      "uuid": 0.18727391744777333,
+      "_done": false,
+      "_paid": false,
+      "_title": "Müll rausbringen",
+      "_amount": 200,
+      "_parent": {
+        "uuid": 0.19656664134206725,
+        "_firstname": "Mama Sabrina",
+        "_bankAccount": { "uuid": 0.10154837233418235, "_iban": "DE00999940000000001128", "_bic": "TESTBICXXXX" }
+      },
+      "_child": null,
+      "_icon": "/img/icon-clean.91e3f13a.png"
+    },
+    {
+      "uuid": 0.17556692753269787,
+      "_done": false,
+      "_paid": false,
+      "_title": "Garage aufräumen",
+      "_amount": 1500,
+      "_parent": {
+        "uuid": 0.19656664134206725,
+        "_firstname": "Mama Sabrina",
+        "_bankAccount": { "uuid": 0.10154837233418235, "_iban": "DE00999940000000001128", "_bic": "TESTBICXXXX" }
+      },
+      "_child": null,
+      "_icon": "/img/icon-clean.91e3f13a.png"
+    },
+    {
+      "uuid": 0.791254719835712,
+      "_done": false,
+      "_paid": false,
+      "_title": "Rasen mähen",
+      "_amount": 2000,
+      "_parent": {
+        "uuid": 0.28798232059134565,
+        "_firstname": "Papa David",
+        "_bankAccount": { "uuid": 0.10154837233418235, "_iban": "DE00999940000000001128", "_bic": "TESTBICXXXX" }
+      },
+      "_child": null,
+      "_icon": "/img/icon-lawn.c2283a3d.png"
+    },
+    {
+      "uuid": 0.23951826987005043,
+      "_done": false,
+      "_paid": false,
+      "_title": "Wäsche sortieren",
+      "_amount": 700,
+      "_parent": {
+        "uuid": 0.19656664134206725,
+        "_firstname": "Mama Sabrina",
+        "_bankAccount": { "uuid": 0.10154837233418235, "_iban": "DE00999940000000001128", "_bic": "TESTBICXXXX" }
+      },
+      "_child": null,
+      "_icon": "/img/icon-laundry.54632b3c.png"
+    },
+    {
+      "uuid": 0.4270778402467379,
+      "_done": true,
+      "_paid": true,
+      "_title": "Gassi gehen",
+      "_amount": 300,
+      "_parent": {
+        "uuid": 0.19656664134206725,
+        "_firstname": "Mama Sabrina",
+        "_bankAccount": { "uuid": 0.10154837233418235, "_iban": "DE00999940000000001128", "_bic": "TESTBICXXXX" }
+      },
+      "_child": {
+        "uuid": 0.7258618713955838,
+        "_firstname": "Carli",
+        "_bankAccount": { "uuid": 0.37738003342180715, "_iban": "DE00999940000000001135", "_bic": "TESTBICXXXX" },
+        "_ratio": 25,
+        "_wishes": [
+          { "uuid": 0.17470246820033375, "_open": true, "_title": "Playstation 4", "_amount": 50000 },
+          { "uuid": 0.49601825230551944, "_open": true, "_title": "Fahrrad", "_amount": 45500 },
+          { "uuid": 0.0416939610791498, "_open": true, "_title": "Snowboard", "_amount": 21500 }
+        ]
+      },
+      "_icon": "/img/icon-dog.53ee40b7.png"
+    },
+    {
+      "uuid": 0.13995003705047648,
+      "_done": true,
+      "_paid": true,
+      "_title": "Zimmer aufräumen",
+      "_amount": 200,
+      "_parent": {
+        "uuid": 0.19656664134206725,
+        "_firstname": "Mama Sabrina",
+        "_bankAccount": { "uuid": 0.10154837233418235, "_iban": "DE00999940000000001128", "_bic": "TESTBICXXXX" }
+      },
+      "_child": {
+        "uuid": 0.7258618713955838,
+        "_firstname": "Carli",
+        "_bankAccount": { "uuid": 0.37738003342180715, "_iban": "DE00999940000000001135", "_bic": "TESTBICXXXX" },
+        "_ratio": 25,
+        "_wishes": [
+          { "uuid": 0.17470246820033375, "_open": true, "_title": "Playstation 4", "_amount": 50000 },
+          { "uuid": 0.49601825230551944, "_open": true, "_title": "Fahrrad", "_amount": 45500 },
+          { "uuid": 0.0416939610791498, "_open": true, "_title": "Snowboard", "_amount": 21500 }
+        ]
+      },
+      "_icon": "/img/icon-clean.91e3f13a.png"
+    }
+  ]
+}

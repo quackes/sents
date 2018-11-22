@@ -16,6 +16,7 @@ const BANK_ACCOUNT_CHILD = new BankAccount("DE00999940000000001135", BANK_BIC);
 const BANK_ACCOUNT_PARENT = new BankAccount("DE00999940000000001128", BANK_BIC);
 
 const SOHN = new Child("Carli", BANK_ACCOUNT_CHILD, [
+  new Wish("Playstation 4", 50000),
   new Wish("Fahrrad", 45500),
   new Wish("Snowboard", 21500)
 ]);
@@ -77,3 +78,5 @@ export const DATA = {
   users: USERS,
   tasks: TASKS
 };
+
+console.log(JSON.stringify(DATA));
