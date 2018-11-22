@@ -29,7 +29,7 @@ class AhoiService {
 
 
     constructor() {
-        this.storageService = new StorageService()
+        this.storageService = window.StorageService
         this.ahoiClient = AhoiClient.ApiClient.instance
         this.ahoiClient.basePath = this.baseUrl + '/ahoi/api/v2'
         this.ahoiClient.setOAuthCredentials(this.baseUrl + '/auth/v1/oauth/token?grant_type=client_credentials',

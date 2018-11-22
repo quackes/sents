@@ -1,7 +1,7 @@
 import injector from 'vue-inject';
 import axios from "axios";
 import {webSocket} from "rxjs/webSocket";
-import {map, tap} from "rxjs/operators";
+import {map, publishReplay, refCount, tap} from "rxjs/operators";
 
 export class StorageService {
 
@@ -23,7 +23,12 @@ export class StorageService {
     }
 
     watch() {
-        return webSocket(this.resourceWs)
+        if(!this.session){
+            this.session =  webSocket(this.resourceWs)
+                .pipe(publishReplay(),refCount(1))
+        }
+        return this.session;
+
     }
 }
 

@@ -1,6 +1,6 @@
 import injector from 'vue-inject';
-import Rx from 'rx-dom-ajax';
 import { DATA, Completion, Role,Task } from '../models';
+import {map} from "rxjs/operators";
 
 export class DataService {
   storageService = window.StorageService;
@@ -10,7 +10,11 @@ export class DataService {
     tasks: []
   };
 
-  map(from, to) {
+
+  map(from) {
+
+    let to = this.data;
+
     from = JSON.parse(JSON.stringify(from));
     to.completions = [];
     from.completions.forEach(completion => {
@@ -30,6 +34,18 @@ export class DataService {
   store() {
     console.log(this.data);
     return this.storageService.put(this.data);
+  }
+
+  dataObs() {
+    if(!this._dataObs){
+
+        this._dataObs= this.storageService.watch()
+            .pipe(
+                map(data =>{
+                    return this.map( data, this.data)
+                }));
+    }
+    return this._dataObs
   }
 
   restore(data) {

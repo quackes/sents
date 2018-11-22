@@ -126,16 +126,14 @@ export default {
   },
   dependencies: ["ahoiService", "DataService"],
   mounted: function() {
-    this.DataService.restore()
-      .then(data => {
+    this.DataService.dataObs()
+        .subscribe(data => {
         console.log(data);
         this.completions = data.completions;
         this.tasks = data.tasks;
         this.user = data.users[0];
-      })
-      .catch(error => {
-        console.warn(error);
       });
+
   },
   computed: {
     numberOfOpenTasks: function() {
