@@ -19,6 +19,12 @@
                     <v-list-tile-sub-title>{{ item.parent.firstname }}</v-list-tile-sub-title>
                 </v-list-tile-content>
 
+
+                        <v-list-tile-action>
+                            <v-btn v-on:click="close(item)" color="accent" fab dark small>
+                                <v-icon>add</v-icon>
+                            </v-btn>
+                        </v-list-tile-action>
                 <v-list-tile-action>
                     <h3 class="dramatic-blue">{{ item.amount|currency }}</h3>
                 </v-list-tile-action>
@@ -85,15 +91,27 @@ export default {
     this.DataService.restore()
       .then(data => {
         console.log(data);
-        // this.completions = data.completions;
-        // this.tasks = data.tasks;
-        // this.user = data.users[0];
+        this.completions = data.completions;
+        this.tasks = data.tasks;
+        this.user = data.users[0];
         this.openTasks = getOpenTasks( data.tasks);
         this.closedTasks = getClosedTasks( data.tasks);
       })
       .catch(error => {
         console.warn(error);
       });
+  },
+  methods: {
+    close: function (task) {
+        let index = this.tasks.indexOf(task);
+        if (index >= 0) {
+            console.log(this.tasks[index]);
+            this.tasks[index].done();
+        this.openTasks = getOpenTasks( this.tasks);
+        this.closedTasks = getClosedTasks( this.tasks);
+        this.DataService.store();
+        }
+    }
   }
 };
 </script>

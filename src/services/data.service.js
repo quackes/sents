@@ -27,8 +27,9 @@ export class DataService {
     return to;
   }
 
-  store(data) {
-    return this.storageService.put(data);
+  store() {
+    console.log(this.data);
+    return this.storageService.put(this.data);
   }
 
   restore(data) {
