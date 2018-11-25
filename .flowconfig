@@ -1,0 +1,11 @@
+[include]
+./src/**/*.js
+
+[ignore]
+./src/**/*.vue
+
+[libs]
+
+[lints]
+
+[options]
