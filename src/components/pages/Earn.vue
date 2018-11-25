@@ -6,10 +6,7 @@
   <v-container>
     <v-list two-line>
         <template v-for="(item, index) in openTasks">
-            <v-list-tile
-              :key="index"
-              avatar
-            >
+            <v-list-tile :key="index" avatar>
                 <v-list-tile-avatar>
                     <img v-bind:src="item.icon">
                 </v-list-tile-avatar>
@@ -20,6 +17,11 @@
                 </v-list-tile-content>
 
 
+                        <v-list-tile-action>
+                            <v-btn v-on:click="remove(item)" fab small>
+                                <v-icon>delete</v-icon>
+                            </v-btn>
+                        </v-list-tile-action>
                         <v-list-tile-action>
                             <v-btn v-on:click="close(item)" color="primary" fab dark small>
                                 <v-icon>check</v-icon>
@@ -52,10 +54,7 @@
     </v-layout>
     <v-list two-line>
         <template v-for="(item, index) in closedTasks">
-            <v-list-tile
-              :key="index"
-              avatar
-            >
+            <v-list-tile :key="index" avatar>
                 <v-list-tile-avatar>
                     <img v-bind:src="item.icon">
                 </v-list-tile-avatar>
@@ -103,6 +102,15 @@ export default {
       });
   },
   methods: {
+    remove: function (task) {
+        let index = this.tasks.indexOf(task);
+        if (index >= 0) {
+            this.tasks.splice(index, 1);
+            this.openTasks = getOpenTasks( this.tasks);
+            this.closedTasks = getClosedTasks( this.tasks);
+            this.DataService.store();
+        }
+    },
     close: function (task) {
         let index = this.tasks.indexOf(task);
         if (index >= 0) {
